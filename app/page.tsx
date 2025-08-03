@@ -1,3 +1,7 @@
 export default function Home() {
-  return <div>page</div>;
+  return (
+    <div>
+      <h1>ナヤミエ</h1>
+    </div>
+  );
 }
