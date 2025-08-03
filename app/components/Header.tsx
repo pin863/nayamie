@@ -11,20 +11,23 @@ export default function Header() {
 
   return (
     <div className="container mx-auto px-3">
-      <header className="flex justify-between items-center py-3 ">
-        {/* ロゴ */}
+      <header className="flex justify-between items-center py-3">
+        {/* ロゴとサブテキスト */}
+        <div className="flex-col ">
         <Link href="/" className="hover:text-gray-700">
           <h1 className="text-xl font-bold">ロゴ</h1>
         </Link>
-        <h2 className="bg-amber-300">地域の悩みや声をシェアできる掲示板</h2>
+        <h2>地域の悩みや声をシェアできる掲示板</h2>
+        </div>
 
         {/* PC用メニュー（md以上） */}
-        <nav className="hidden md:flex space-x-6 font-semibold">
+        <nav className="hidden md:flex space-x-6 font-semibold fixed">
           <Link href="/login" className="hover:text-gray-700">
             <Button variant="primary" size="sm">
               ログイン
             </Button>
           </Link>
+          
           <Link href="/signup" className="hover:text-gray-700">
             <Button variant="gray" size="sm">
               新規登録
@@ -36,7 +39,7 @@ export default function Header() {
         <button
           onClick={handleMenuOpen}
           type="button"
-          className="md:hidden flex flex-col justify-center items-center space-y-1 z-20"
+          className="md:hidden flex flex-col justify-center items-center space-y-1 z-20 fixed right-6 top-6"
           aria-label="メニューを開く"
         >
           <div

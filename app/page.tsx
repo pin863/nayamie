@@ -1,7 +1,14 @@
+import Searchbar from "./components/Searchbar";
+import PostComponent from "./components/PostComponent";
+
 export default function Home() {
+  const damy = {
+    title:"タイトルです"
+  }
   return (
-    <div>
-      <h1>ナヤミエ</h1>
-    </div>
+    <main>
+      <Searchbar />
+    <PostComponent title={damy.title} />
+    </main>
   );
 }
