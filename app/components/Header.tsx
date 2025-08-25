@@ -13,11 +13,15 @@ export default function Header() {
     <div>
       <header className="flex justify-between items-center py-3">
         {/* ロゴとサブテキスト */}
-        <div className="flex space-x-3">
+        <div className="flex space-x-3 justify-between items-center tracking-widest">
           <Link href="/" className="hover:text-gray-700">
-            <h1 className="text-xl font-bold">ロゴ</h1>
+            <h1 className="text-xl font-bold">ナヤミエ</h1>
           </Link>
-          <h2>地域の悩みや声をシェアできる掲示板</h2>
+          <h2 className="text-sm">
+            地域の悩みや声を
+            <br />
+            シェアできる掲示板
+          </h2>
         </div>
 
         {/* PC用メニュー（md以上） */}
