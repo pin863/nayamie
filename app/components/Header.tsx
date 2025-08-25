@@ -14,20 +14,20 @@ export default function Header() {
       <header className="flex justify-between items-center py-3">
         {/* ロゴとサブテキスト */}
         <div className="flex-col ">
-        <Link href="/" className="hover:text-gray-700">
-          <h1 className="text-xl font-bold">ロゴ</h1>
-        </Link>
-        <h2>地域の悩みや声をシェアできる掲示板</h2>
+          <Link href="/" className="hover:text-gray-700">
+            <h1 className="text-xl font-bold">ロゴ</h1>
+          </Link>
+          <h2>地域の悩みや声をシェアできる掲示板</h2>
         </div>
 
         {/* PC用メニュー（md以上） */}
-        <nav className="hidden md:flex space-x-6 font-semibold fixed">
+        <nav className="hidden md:flex space-x-6 font-semibold ">
           <Link href="/login" className="hover:text-gray-700">
             <Button variant="primary" size="sm">
               ログイン
             </Button>
           </Link>
-          
+
           <Link href="/signup" className="hover:text-gray-700">
             <Button variant="gray" size="sm">
               新規登録

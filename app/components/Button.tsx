@@ -9,6 +9,7 @@ type ButtonProps = {
   href?: string;
   variant?: "primary" | "secondary" | "gray";
   size?: "sm" | "md" | "lg";
+  shape?: "rounded" | "square";
 } & React.ComponentProps<"button">;
 
 const Button = ({
@@ -18,6 +19,7 @@ const Button = ({
   className = "",
   variant = "primary",
   size = "md",
+  shape = "rounded",
 }: ButtonProps) => {
   // ボタンカラー選択
   const variantClass = {
@@ -33,11 +35,17 @@ const Button = ({
     lg: "",
   }[size];
 
+  // 形選択
+  const shapeClass = {
+    rounded: "rounded-full",
+    square: "",
+  }[shape];
+
   // ボタン共通css
-  const baseClass = "transform rounded-full hover:cursor-pointer shadow-sm";
+  const baseClass = "transform  hover:cursor-pointer shadow-sm";
 
   // 全てのcssまとめ
-  const combinedClass = `${variantClass} ${sizeClass} ${baseClass} ${className}`;
+  const combinedClass = `${variantClass} ${sizeClass} ${shapeClass} ${baseClass} ${className}`;
 
   if (href) {
     return (
