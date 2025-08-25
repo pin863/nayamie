@@ -10,10 +10,10 @@ export default function Header() {
   };
 
   return (
-    <div className="container mx-auto px-3">
+    <div>
       <header className="flex justify-between items-center py-3">
         {/* ロゴとサブテキスト */}
-        <div className="flex-col ">
+        <div className="flex space-x-3">
           <Link href="/" className="hover:text-gray-700">
             <h1 className="text-xl font-bold">ロゴ</h1>
           </Link>

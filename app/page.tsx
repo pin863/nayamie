@@ -13,7 +13,7 @@ export default function Home() {
   return (
     <main>
       <Searchbar />
-      <div className="mx-30 space-y-4 mt-5">
+      <div className="space-y-4 mt-5">
         <p>最近の投稿</p>
         <div className="grid grid-cols-3 gap-4 ">
           <PostComponent
