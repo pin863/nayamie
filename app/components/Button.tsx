@@ -42,7 +42,7 @@ const Button = ({
   }[shape];
 
   // ボタン共通css
-  const baseClass = "transform  hover:cursor-pointer shadow-sm";
+  const baseClass = "transform tracking-widest hover:cursor-pointer shadow-md";
 
   // 全てのcssまとめ
   const combinedClass = `${variantClass} ${sizeClass} ${shapeClass} ${baseClass} ${className}`;

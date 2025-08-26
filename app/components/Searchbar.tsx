@@ -12,6 +12,11 @@ export default function Searchbar() {
               カテゴリ
             </option>
             <option value="ごみ問題">ごみ問題</option>
+            <option value="ごみ問題">ごみ問題</option>
+            <option value="ごみ問題">ごみ問題</option>
+            <option value="ごみ問題">ごみ問題</option>
+            <option value="ごみ問題">ごみ問題</option>
+            <option value="ごみ問題">ごみ問題</option>
           </select>
         </div>
 
@@ -24,6 +29,8 @@ export default function Searchbar() {
               都道府県
             </option>
             <option value="北海道">北海道</option>
+            <option value="東京都">東京都</option>
+            <option value="大阪府">大阪府</option>
           </select>
         </div>
 
