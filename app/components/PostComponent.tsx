@@ -1,4 +1,4 @@
-import type { Props } from "type";
+import type { Post } from "type";
 import Button from "./Button";
 import { getCategoryStyle } from "../utils/getCategoryStyle";
 
@@ -9,7 +9,8 @@ export default function PostComponent({
   date,
   content,
   username,
-}: Props) {
+  showButton,
+}: Post) {
   const style = getCategoryStyle(category) as React.CSSProperties;
 
   return (
@@ -27,9 +28,11 @@ export default function PostComponent({
       <h3 className="text-sm text-gray-500">{content}</h3>
       <div className="flex justify-between items-center">
         <p className="text-gray-500 text-xs">{username}</p>
-        <Button size="sm" shape="square" className="text-sm">
-          詳しく見る
-        </Button>
+        {showButton && (
+          <Button size="sm" shape="square" className="text-sm">
+            詳しく見る
+          </Button>
+        )}
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ export default function Home() {
     prefecture: "東京都",
     date: "2025年8月1日",
     username: "田中たろう",
+    showButton: true,
   };
   return (
     <main>
@@ -23,6 +24,7 @@ export default function Home() {
             title={damy.title}
             content={damy.content}
             username={damy.username}
+            showButton={damy.showButton}
           />
           <PostComponent
             category={damy.category}
@@ -31,6 +33,7 @@ export default function Home() {
             title={damy.title}
             content={damy.content}
             username={damy.username}
+            showButton={damy.showButton}
           />
           <PostComponent
             category={damy.category}
@@ -39,6 +42,7 @@ export default function Home() {
             title={damy.title}
             content={damy.content}
             username={damy.username}
+            showButton={damy.showButton}
           />
         </div>
       </div>
