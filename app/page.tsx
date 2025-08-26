@@ -14,7 +14,7 @@ export default function Home() {
     <main>
       <Searchbar />
       <div className="space-y-4 mt-5">
-        <p>最近の投稿</p>
+        <h3>最近の投稿</h3>
         <div className="grid grid-cols-3 gap-4 ">
           <PostComponent
             category={damy.category}
