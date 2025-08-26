@@ -7,7 +7,7 @@ import React from "react";
 
 type ButtonProps = {
   href?: string;
-  variant?: "primary" | "secondary" | "gray";
+  variant?: "primary" | "secondary" | "gray" | "white";
   size?: "sm" | "md" | "lg";
   shape?: "rounded" | "square";
 } & React.ComponentProps<"button">;
@@ -25,13 +25,15 @@ const Button = ({
   const variantClass = {
     primary: "bg-primary text-white duration-300 hover:opacity-50",
     secondary: "bg-secondary text-white duration-300 hover:opacity-50",
-    gray: "bg-gray-300 text-gray-700 duration-300 hover:opacity-50",
+    gray: "bg-gray-200 text-gray-600 duration-300 hover:opacity-50",
+    white:
+      "bg-gray-white border border-gray-200 text-gray-600 duration-300 hover:opacity-50",
   }[variant];
 
   // ボタンサイズ選択
   const sizeClass = {
-    sm: "px-8 py-2",
-    md: "px-10 py-3 text-xl font-bold",
+    sm: "px-10 py-3 text-sm",
+    md: "px-10 py-3 text-lg font-bold",
     lg: "",
   }[size];
 

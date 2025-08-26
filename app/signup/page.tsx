@@ -39,17 +39,24 @@ export default function page() {
             <Button
               variant="primary"
               size="md"
+              shape="square"
+              className="w-full"
               onClick={() => alert("サインアップ！")}
             >
               新規登録
             </Button>
           </div>
           <div className="text-center">
-            <Button variant="gray" size="sm">
-              <Link href="/login">
+            <Link href="/login">
+              <Button
+                variant="white"
+                size="sm"
+                shape="square"
+                className="w-full"
+              >
                 <p className="">アカウントをお持ちの方はログイン</p>
-              </Link>
-            </Button>
+              </Button>{" "}
+            </Link>
           </div>
         </div>
       </main>
