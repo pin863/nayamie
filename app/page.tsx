@@ -11,7 +11,6 @@ export default function Home() {
     username: "田中たろう",
     showButton: true,
     href: "/posts/1",
-    buttonText: "詳しく見る",
   };
   return (
     <main>
@@ -28,7 +27,6 @@ export default function Home() {
             username={dummy.username}
             showButton={dummy.showButton}
             href={dummy.href}
-            buttonText={dummy.buttonText}
           />
           <PostComponent
             category={dummy.category}
@@ -39,7 +37,6 @@ export default function Home() {
             username={dummy.username}
             showButton={dummy.showButton}
             href={dummy.href}
-            buttonText={dummy.buttonText}
           />
           <PostComponent
             category={dummy.category}
@@ -50,7 +47,6 @@ export default function Home() {
             username={dummy.username}
             showButton={dummy.showButton}
             href={dummy.href}
-            buttonText={dummy.buttonText}
           />
         </div>
       </div>

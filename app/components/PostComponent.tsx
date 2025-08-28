@@ -12,7 +12,7 @@ export default function PostComponent({
   username,
   showButton,
   href,
-  buttonText,
+  isOwner,
 }: Post) {
   const style = getCategoryStyle(category) as React.CSSProperties;
 
@@ -31,10 +31,19 @@ export default function PostComponent({
       <h3 className="text-sm text-gray-500">{content}</h3>
       <div className="flex justify-between items-center">
         <p className="text-gray-500 text-xs">{username}</p>
+
+        {/* 編集ボタン */}
+        {isOwner && (
+          <Button size="sm" shape="square" variant="secondary">
+            編集
+          </Button>
+        )}
+
+        {/* 詳しく見るボタン */}
         {showButton && href && (
           <Link href={href}>
             <Button size="sm" shape="square" className="text-sm">
-              {buttonText}
+              詳しく見る
             </Button>
           </Link>
         )}

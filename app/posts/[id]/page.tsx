@@ -10,6 +10,7 @@ export default function Home() {
     date: "2025年8月1日",
     username: "田中たろう",
     showButton: false,
+    isOwner: true,
   };
 
   const comments = [
@@ -37,6 +38,7 @@ export default function Home() {
             content={dummy.content}
             username={dummy.username}
             showButton={dummy.showButton}
+            isOwner={dummy.isOwner}
           />
         </div>
 

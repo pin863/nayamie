@@ -7,7 +7,7 @@ export type Post = {
   username: string;
   showButton: boolean;
   href?: string;
-  buttonText?: string;
+  isOwner?: boolean;
 };
 
 export type Comment = {
