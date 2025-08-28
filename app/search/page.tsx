@@ -2,7 +2,7 @@ import Searchbar from "../components/Searchbar";
 import PostComponent from "../components/PostComponent";
 
 export default function Home() {
-  const damy = {
+  const dummy = {
     category: "ごみ問題",
     title: "タイトルですタイトルです",
     content: "本文です本文です本文です本文です本文です本文です本文です",
@@ -21,31 +21,31 @@ export default function Home() {
         </p>
         <div className="grid grid-cols-3 gap-4 ">
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
           />
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
           />
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
           />
         </div>
       </div>

@@ -1,6 +1,7 @@
 import type { Post } from "type";
 import Button from "./Button";
 import { getCategoryStyle } from "../utils/getCategoryStyle";
+import Link from "next/link";
 
 export default function PostComponent({
   title,
@@ -10,6 +11,8 @@ export default function PostComponent({
   content,
   username,
   showButton,
+  href,
+  buttonText,
 }: Post) {
   const style = getCategoryStyle(category) as React.CSSProperties;
 
@@ -28,10 +31,12 @@ export default function PostComponent({
       <h3 className="text-sm text-gray-500">{content}</h3>
       <div className="flex justify-between items-center">
         <p className="text-gray-500 text-xs">{username}</p>
-        {showButton && (
-          <Button size="sm" shape="square" className="text-sm">
-            詳しく見る
-          </Button>
+        {showButton && href && (
+          <Link href={href}>
+            <Button size="sm" shape="square" className="text-sm">
+              {buttonText}
+            </Button>
+          </Link>
         )}
       </div>
     </div>

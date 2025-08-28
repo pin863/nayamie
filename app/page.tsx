@@ -2,7 +2,7 @@ import Searchbar from "./components/Searchbar";
 import PostComponent from "./components/PostComponent";
 
 export default function Home() {
-  const damy = {
+  const dummy = {
     category: "ごみ問題",
     title: "タイトルですタイトルです",
     content: "本文です本文です本文です本文です本文です本文です本文です",
@@ -10,6 +10,8 @@ export default function Home() {
     date: "2025年8月1日",
     username: "田中たろう",
     showButton: true,
+    href: "/posts/1",
+    buttonText: "詳しく見る",
   };
   return (
     <main>
@@ -18,31 +20,37 @@ export default function Home() {
         <h3>最近の投稿</h3>
         <div className="grid grid-cols-3 gap-4 ">
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
+            href={dummy.href}
+            buttonText={dummy.buttonText}
           />
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
+            href={dummy.href}
+            buttonText={dummy.buttonText}
           />
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
+            href={dummy.href}
+            buttonText={dummy.buttonText}
           />
         </div>
       </div>

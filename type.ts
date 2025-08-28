@@ -6,4 +6,12 @@ export type Post = {
   date: string;
   username: string;
   showButton: boolean;
+  href?: string;
+  buttonText?: string;
+};
+
+export type Comment = {
+  content: string;
+  username: string;
+  date: string;
 };

@@ -1,7 +1,8 @@
+import Button from "@/app/components/Button";
 import PostComponent from "../../components/PostComponent";
 
 export default function Home() {
-  const damy = {
+  const dummy = {
     category: "ごみ問題",
     title: "タイトルですタイトルです",
     content: "本文です本文です本文です本文です本文です本文です本文です",
@@ -10,19 +11,67 @@ export default function Home() {
     username: "田中たろう",
     showButton: false,
   };
+
+  const comments = [
+    {
+      content: "コメントコメントコメントコメントコメント",
+      date: "2025年8月1日",
+      username: "鈴木たろう",
+    },
+    {
+      content: "別のコメントです",
+      date: "2025年8月2日",
+      username: "佐藤はなこ",
+    },
+  ];
+
   return (
     <main>
-      <div className="space-y-4 mt-5">
+      <div className="space-y-8 mt-10">
         <div className="w-1/2 mx-auto">
           <PostComponent
-            category={damy.category}
-            prefecture={damy.prefecture}
-            date={damy.date}
-            title={damy.title}
-            content={damy.content}
-            username={damy.username}
-            showButton={damy.showButton}
+            category={dummy.category}
+            prefecture={dummy.prefecture}
+            date={dummy.date}
+            title={dummy.title}
+            content={dummy.content}
+            username={dummy.username}
+            showButton={dummy.showButton}
           />
+        </div>
+
+        <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">
+          <h4 className="text-lg px-4 pb-2">コメント</h4>
+          <div className="bg-gray-100 p-4 rounded-md">
+            <textarea
+              className="bg-white border border-gray-300 rounded w-full placeholder:tracking-wider placeholder:text-sm placeholder:p-1"
+              placeholder="この問題について意見を共有しましょう"
+            ></textarea>
+            <div className="text-right mt-2">
+              <Button size="sm" variant="secondary">
+                コメント投稿
+              </Button>
+            </div>
+          </div>
+
+          <div className="space-y-5">
+            {comments.length === 0 ? (
+              <p className="text-gray-400 text-center">
+                まだコメントがありません
+              </p>
+            ) : (
+              comments.map((comment, id) => (
+                <div key={id} className="space-y-2">
+                  <hr className="border-gray-300 my-5" />
+                  <div className="flex space-x-3 text-sm text-gray-400">
+                    <p>{comment.username}</p>
+                    <p>{comment.date}</p>
+                  </div>
+                  <p className="text-gray-700">{comment.content}</p>
+                </div>
+              ))
+            )}
+          </div>
         </div>
       </div>
     </main>
