@@ -7,7 +7,7 @@ import React from "react";
 
 type ButtonProps = {
   href?: string;
-  variant?: "primary" | "secondary" | "gray" | "white";
+  variant?: "primary" | "secondary" | "gray" | "white" | "red";
   size?: "sm" | "md" | "lg";
   shape?: "rounded" | "square";
 } & React.ComponentProps<"button">;
@@ -26,6 +26,7 @@ const Button = ({
     primary: "bg-primary text-white duration-300 hover:opacity-50",
     secondary: "bg-secondary text-white duration-300 hover:opacity-50",
     gray: "bg-gray-200 text-gray-600 duration-300 hover:opacity-50",
+    red: "bg-rose-900 text-white duration-300 hover:opacity-50",
     white:
       "bg-gray-white border border-gray-200 text-gray-600 duration-300 hover:opacity-50",
   }[variant];

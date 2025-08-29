@@ -58,12 +58,12 @@ export default function page() {
           </div>
           <div className="text-center space-x-6 mt-10">
             <Link href={`/posts/${postId}/delete`}>
-              <Button variant="gray" size="sm">
+              <Button variant="red" size="sm">
                 削除する
               </Button>
             </Link>
             <Link href={`/posts/${postId}/edit/confirm`}>
-              <Button variant="primary" size="sm">
+              <Button variant="secondary" size="sm">
                 確認する
               </Button>
             </Link>

@@ -50,7 +50,7 @@ export default function Page() {
           </Link>
           <Link href="/">
             <Button
-              variant="primary"
+              variant="red"
               size="sm"
               onClick={() => alert("投稿を削除しました！")}
             >
