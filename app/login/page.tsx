@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import FormInput from "../components/field/FormInput";
+import FormInput from "../components/FormInput";
 import Button from "../components/Button";
 
 export default function page() {

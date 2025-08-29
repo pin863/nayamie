@@ -34,9 +34,11 @@ export default function PostComponent({
 
         {/* 編集ボタン */}
         {isOwner && (
-          <Button size="sm" shape="square" variant="secondary">
-            編集
-          </Button>
+          <Link href="/edit">
+            <Button size="sm" shape="square" variant="secondary">
+              編集
+            </Button>
+          </Link>
         )}
 
         {/* 詳しく見るボタン */}
