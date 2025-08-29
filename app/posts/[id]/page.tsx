@@ -5,7 +5,8 @@ export default function Home() {
   const dummy = {
     category: "ごみ問題",
     title: "タイトルですタイトルです",
-    content: "本文です本文です本文です本文です本文です本文です本文です",
+    content:
+      "本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です",
     prefecture: "東京都",
     date: "2025年8月1日",
     username: "田中たろう",
@@ -30,16 +31,7 @@ export default function Home() {
     <main>
       <div className="space-y-8 mt-10">
         <div className="w-1/2 mx-auto">
-          <PostComponent
-            category={dummy.category}
-            prefecture={dummy.prefecture}
-            date={dummy.date}
-            title={dummy.title}
-            content={dummy.content}
-            username={dummy.username}
-            showButton={dummy.showButton}
-            isOwner={dummy.isOwner}
-          />
+          <PostComponent {...dummy} />
         </div>
 
         <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">

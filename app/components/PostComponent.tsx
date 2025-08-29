@@ -1,6 +1,7 @@
 import type { Post } from "type";
 import Button from "./Button";
 import { getCategoryStyle } from "../utils/getCategoryStyle";
+import { truncateContent } from "../utils/truncateContent";
 import Link from "next/link";
 
 export default function PostComponent({
@@ -13,8 +14,12 @@ export default function PostComponent({
   showButton,
   href,
   isOwner,
-}: Post) {
+  truncate = false,
+}: Post & { truncate?: boolean }) {
+  // カテゴリによって色を変更
   const style = getCategoryStyle(category) as React.CSSProperties;
+  // contentが50文字以上なら省略する
+  const displayContent = truncateContent(content, 50, truncate);
 
   return (
     <div className="bg-white border border-gray-300 shadow-md p-6 rounded-2xl text-gray-700 space-y-3">
@@ -30,7 +35,7 @@ export default function PostComponent({
       </div>
       {/* タイトル、内容、ユーザー名 */}
       <h2 className="font-bold text-lg">{title}</h2>
-      <h3 className="text-sm text-gray-500">{content}</h3>
+      <h3 className="text-sm text-gray-500">{displayContent}</h3>
       <div className="flex justify-between items-center mt-6">
         <p className="text-gray-500 text-xs">{username}</p>
 
