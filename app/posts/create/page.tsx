@@ -28,7 +28,7 @@ export default function page() {
   return (
     <>
       <main className="flex justify-center">
-        <div className="px-16 py-10 space-y-6 w-1/2 mt-15 bg-white shadow-md rounded-xl">
+        <div className="px-16 py-10 space-y-6 w-1/2 my-5 bg-white shadow-md rounded-xl">
           <h3 className="text-2xl font-bold tracking-wider text-center text-gray-600">
             投稿画面
           </h3>
@@ -49,9 +49,16 @@ export default function page() {
           <CategorySelector />
           {/* 都道府県選択 */}
           <PrefectureSelect />
+          <div className="bg-amber-100 rounded-xl p-4 border border-amber-300 text-orange-900 tracking-wider">
+            <p className="font-bold pb-1">投稿前にご確認ください</p>
+            <ul className="pl-3 text-sm">
+              <li>・個人情報は投稿しないでください</li>
+              <li>・建設的な議論につながる内容を心がけてください</li>
+            </ul>
+          </div>
           <div className="text-center">
             <Link href="/posts/create/confirm">
-              <Button variant="secondary" size="sm" shape="square">
+              <Button variant="secondary" size="sm">
                 確認する
               </Button>
             </Link>
