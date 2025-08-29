@@ -5,3 +5,14 @@
   --color-secondary: #1b3f8c;
   --color-basecolor: #faf9f7;
 }
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+span,
+label,
+button {
+  caret-color: transparent;
+}

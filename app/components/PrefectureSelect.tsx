@@ -68,7 +68,7 @@ export default function PrefectureSelect() {
         id="prefecture"
         value={selected}
         onChange={(e) => setSelected(e.target.value)}
-        className="w-full py-3 px-3 rounded-md border border-gray-300 bg-white text-gray-700 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
+        className="w-full py-3 px-3 rounded-md border border-gray-300 bg-white text-gray-700 shadow-sm hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
       >
         <option value="">選択してください</option>
         {prefectures.map((pref) => (

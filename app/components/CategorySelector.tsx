@@ -33,7 +33,7 @@ export default function CategorySelector() {
               onClick={() => setSelected(cat)}
               className={`px-6 py-3 rounded-lg font-bold transition-colors w-full border border-gray-300 shadow-sm
                 ${isActive ? "bg-primary text-white" : "bg-white text-gray-700"}
-                hover:opacity-75`}
+                hover:opacity-75 hover:cursor-pointer`}
             >
               {cat}
             </button>
