@@ -57,7 +57,7 @@ export default function page() {
             </ul>
           </div>
           <div className="text-center space-x-6 mt-10">
-            <Link href="/posts/delete">
+            <Link href={`/posts/${postId}/delete`}>
               <Button variant="gray" size="sm">
                 削除する
               </Button>
