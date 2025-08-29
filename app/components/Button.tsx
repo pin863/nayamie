@@ -32,7 +32,7 @@ const Button = ({
 
   // ボタンサイズ選択
   const sizeClass = {
-    sm: "px-10 py-3 text-sm",
+    sm: "px-10 py-2 text-sm",
     md: "px-10 py-3 text-lg font-bold",
     lg: "",
   }[size];
