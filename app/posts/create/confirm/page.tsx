@@ -2,8 +2,11 @@
 
 import Link from "next/link";
 import Button from "../../../components/Button";
+import { useMyContext } from "../layout";
 
 export default function Page() {
+  const data = useMyContext();
+
   const postId = 30;
   const inputs = [
     {
@@ -26,6 +29,7 @@ export default function Page() {
 
   return (
     <main className="flex justify-center">
+      <p>{data.info}</p>
       <div className="px-16 py-10 space-y-6 w-1/2 my-5 bg-white shadow-md rounded-xl">
         <h3 className="text-2xl font-bold tracking-wider text-center text-gray-600">
           投稿確認画面

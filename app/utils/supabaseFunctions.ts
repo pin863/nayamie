@@ -1,10 +1,9 @@
 import { supabase } from "./supabaseClient";
-import type { PostFromDB } from "type";
 
 // 最新6件の取得
 export const getRecentPosts = async () => {
   const { data, error } = await supabase
-    .from<PostFromDB>("posts")
+    .from("posts")
     .select(
       `
     id,

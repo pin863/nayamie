@@ -1,4 +1,4 @@
-import type { Post } from "type";
+import type { Post } from "@/types/type";
 import Button from "./Button";
 import { getCategoryStyle } from "../utils/getCategoryStyle";
 import { truncateContent } from "../utils/truncateContent";

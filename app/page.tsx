@@ -6,7 +6,7 @@ import Button from "./components/Button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { getRecentPosts } from "./utils/supabaseFunctions";
-import type { Post } from "type";
+import type { Post } from "@/types/type";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
