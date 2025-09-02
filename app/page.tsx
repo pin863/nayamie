@@ -1,7 +1,17 @@
+"use client";
+
 import Searchbar from "./components/Searchbar";
 import PostComponent from "./components/PostComponent";
 import Button from "./components/Button";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+import { getAllPosts } from "./utils/supabaseFunctions";
+
+type Post = {
+  id: string;
+  title: string;
+  content: string;
+};
 
 export default function Home() {
   const dummy = {
@@ -15,6 +25,17 @@ export default function Home() {
     href: "/posts/1",
     truncate: true,
   };
+
+  const [posts, setPosts] = useState<Post[]>([]);
+  useEffect(() => {
+    const getPosts = async () => {
+      const posts = await getAllPosts();
+      setPosts(posts ?? []);
+      console.log(posts);
+    };
+    getPosts();
+  }, []);
+
   return (
     <main className="py-6">
       <Searchbar />
@@ -34,6 +55,7 @@ export default function Home() {
           <PostComponent {...dummy} category={"自然・環境"} />
           <PostComponent {...dummy} category={"子育て"} />
           <PostComponent {...dummy} category={"その他"} />
+          <PostComponent {...posts} />
         </div>
       </div>
     </main>
