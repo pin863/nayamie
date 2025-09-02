@@ -1,15 +1,8 @@
 import { supabase } from "./supabaseClient";
+import type { PostFromDB } from "type";
 
+// 最新6件の取得
 export const getRecentPosts = async () => {
-  type PostFromDB = {
-    id: string;
-    title: string;
-    content: string;
-    created_at: string;
-    user?: [{ name: string }];
-    category?: [{ name: string }];
-    prefecture?: [{ name: string }];
-  };
   const { data, error } = await supabase
     .from<PostFromDB>("posts")
     .select(
@@ -30,7 +23,6 @@ export const getRecentPosts = async () => {
     console.error(error);
     return [];
   }
-  console.log("整形前のデータ:", data);
 
   return (data ?? []).map((p) => ({
     id: p.id,
@@ -42,3 +34,8 @@ export const getRecentPosts = async () => {
     prefecture: p.prefecture?.name ?? "未設定",
   }));
 };
+
+// 新規投稿作成
+// export const createPost = async (title: string) => {
+//   await supabase.from("posts").insert({ name: title });
+// };
