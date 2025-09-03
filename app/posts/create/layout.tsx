@@ -2,20 +2,34 @@
 
 import { createContext, useContext, ReactNode } from "react";
 
-interface MyContextType {
-  info: string;
+interface FormContextType {
+  label: string;
   context: string;
 }
-const contextValue: MyContextType = {
-  info: "コンテキストの読み込みに成功しました",
-  context: "コンテキストはMyContextです",
-};
+const contextValue: FormContextType[] = [
+  {
+    label: "タイトル",
+    context: "〇〇公園のポイ捨て",
+  },
+  {
+    label: "詳細内容",
+    context: "〇〇公園にゴミが散乱しています。",
+  },
+  {
+    label: "カテゴリ",
+    context: "ごみ問題",
+  },
+  {
+    label: "都道府県",
+    context: "東京都",
+  },
+];
 
-const MyContext = createContext<MyContextType>(contextValue);
+const FormContext = createContext<FormContextType[]>(contextValue);
 
-//コンポーネント内でContextを使用するためのカスタムHookを定義
-export function useMyContext() {
-  return useContext(MyContext);
+//コンポーネント内でContextを使用するためのカスタムhookを定義
+export function useFormContext() {
+  return useContext(FormContext);
 }
 
 interface PostsLayoutProps {
@@ -23,6 +37,6 @@ interface PostsLayoutProps {
 }
 export default function PostsLayout({ children }: PostsLayoutProps) {
   return (
-    <MyContext.Provider value={contextValue}>{children}</MyContext.Provider>
+    <FormContext.Provider value={contextValue}>{children}</FormContext.Provider>
   );
 }
