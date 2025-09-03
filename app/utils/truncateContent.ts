@@ -1,3 +1,4 @@
+// 50文字以上なら省略する関数
 export function truncateContent(
   content: string,
   length = 50,

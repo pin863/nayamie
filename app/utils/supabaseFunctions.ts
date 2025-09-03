@@ -1,5 +1,5 @@
-import { supabase } from "./supabaseClient";
-import { Database } from "../../types/database.types"; 
+import { supabase } from "@/app/utils/supabaseClient";
+import { Database } from "@/types/database.types"; 
 
 type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
 

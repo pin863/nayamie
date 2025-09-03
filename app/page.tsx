@@ -1,11 +1,11 @@
 "use client";
 
-import Searchbar from "./components/Searchbar";
-import PostComponent from "./components/PostComponent";
-import Button from "./components/Button";
+import Searchbar from "@/app/components/Searchbar";
+import PostComponent from "@/app/components/PostComponent";
+import Button from "@/app/components/Button";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import { getRecentPosts } from "./utils/supabaseFunctions";
+import { getRecentPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
 
 export default function Home() {

@@ -1,18 +1,34 @@
 "use client";
 
 import Link from "next/link";
-import FormInput from "../components/FormInput";
-import Button from "../components/Button";
+import FormInput from "@/app/components/FormInput";
+import Button from "@/app/components/Button";
+import { useState } from "react";
 
-export default function page() {
+export default function Page() {
   //FormInputの要素
   const inputs = [
-    { label: "ユーザーネーム", placeholder: "ユーザーネーム" },
-    { label: "メールアドレス", placeholder: "メールアドレス" },
-    { label: "パスワード", placeholder: "パスワード" },
-    { label: "パスワード(確認)", placeholder: "パスワード(確認)" },
+    { key: "username", label: "ユーザーネーム", placeholder: "ユーザーネーム" },
+    { key: "email", label: "メールアドレス", placeholder: "メールアドレス" },
+    { key: "password", label: "パスワード", placeholder: "パスワード" },
+    {
+      key: "passwordConfirm",
+      label: "パスワード(確認)",
+      placeholder: "パスワード(確認)",
+    },
   ];
-
+  const [form, setForm] = useState({
+    username: "",
+    email: "",
+    password: "",
+    passwordConfirm: "",
+  });
+  const handleChange = (
+    key: string,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setForm((prev) => ({ ...prev, [key]: e.target.value }));
+  };
   return (
     <>
       <main className="flex justify-center">
@@ -31,6 +47,8 @@ export default function page() {
                 key={input.label}
                 label={input.label}
                 placeholder={input.placeholder}
+                value={form[input.key as keyof typeof form]}
+                onChange={(e) => handleChange(input.key, e)}
               />
             ))}
           </div>

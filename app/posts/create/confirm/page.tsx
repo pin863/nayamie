@@ -1,101 +1,94 @@
 "use client";
 
-import { useFormContext } from "../layout";
+import { useFormContext } from "@/app/posts/create/layout";
 import { useRouter } from "next/navigation";
-import Button from "../../../components/Button";
+import Button from "@/app/components/Button";
 import { createPost } from "@/app/utils/supabaseFunctions";
-import type { Tables } from "@/types/database.types";
+import { supabase } from "@/app/utils/supabaseClient";
 
 export default function Page() {
   const { data } = useFormContext();
   const router = useRouter();
 
-  // DBから取れるカテゴリ
-  type Category = Tables<"categories">;
-
-  // name をユニオン型として取り出す
-  type CategoryName = Category["name"];
-  // カテゴリ名 → ID のマッピング
-  const categoryMap: Record<CategoryName, number> = {
-    ごみ問題: 1,
-    騒音: 2,
-    外国人: 3,
-    交通: 4,
-    子育て: 5,
-    その他: 6,
-  };
-
-  // 都道府県名 → ID のマッピング
-  const prefectureMap: Record<string, number> = {
-    北海道: 1,
-    青森県: 2,
-    岩手県: 3,
-    宮城県: 4,
-    秋田県: 5,
-    山形県: 6,
-    福島県: 7,
-    茨城県: 8,
-    栃木県: 9,
-    群馬県: 10,
-    埼玉県: 11,
-    千葉県: 12,
-    東京都: 13,
-    神奈川県: 14,
-    新潟県: 15,
-    富山県: 16,
-    石川県: 17,
-    福井県: 18,
-    山梨県: 19,
-    長野県: 20,
-    岐阜県: 21,
-    静岡県: 22,
-    愛知県: 23,
-    三重県: 24,
-    滋賀県: 25,
-    京都府: 26,
-    大阪府: 27,
-    兵庫県: 28,
-    奈良県: 29,
-    和歌山県: 30,
-    鳥取県: 31,
-    島根県: 32,
-    岡山県: 33,
-    広島県: 34,
-    山口県: 35,
-    徳島県: 36,
-    香川県: 37,
-    愛媛県: 38,
-    高知県: 39,
-    福岡県: 40,
-    佐賀県: 41,
-    長崎県: 42,
-    熊本県: 43,
-    大分県: 44,
-    宮崎県: 45,
-    鹿児島県: 46,
-    沖縄県: 47,
-  };
-
   const handleSubmit = async () => {
-    // 選択中のカテゴリを取得
     const categoryContext = data.find((d) => d.label === "カテゴリ")?.context;
-    const category_id = categoryContext ? categoryMap[categoryContext] : null;
+    const prefectureContext = data.find((d) => d.label === "都道府県")?.context;
 
-    if (!category_id) {
+    if (!categoryContext) {
       alert("カテゴリが未選択です");
       return;
     }
-
-    // 選択中の県
-    const prefectureContext = data.find((d) => d.label === "都道府県")?.context;
-    const prefecture_id = prefectureContext
-      ? prefectureMap[prefectureContext]
-      : null;
-
-    if (!prefecture_id) {
+    if (!prefectureContext) {
       alert("都道府県が未選択です");
       return;
     }
+
+    // DBからカテゴリIDを取得
+    const { data: categoryData, error: categoryError } = await supabase
+      .from("categories")
+      .select("id")
+      .eq("name", categoryContext)
+      .single();
+
+    if (categoryError || !categoryData?.id) {
+      alert("カテゴリ取得に失敗しました");
+      console.error(categoryError);
+      return;
+    }
+
+    const category_id = categoryData.id;
+
+    // 都道府県ID
+    const prefectureMap: Record<string, number> = {
+      北海道: 1,
+      青森県: 2,
+      岩手県: 3,
+      宮城県: 4,
+      秋田県: 5,
+      山形県: 6,
+      福島県: 7,
+      茨城県: 8,
+      栃木県: 9,
+      群馬県: 10,
+      埼玉県: 11,
+      千葉県: 12,
+      東京都: 13,
+      神奈川県: 14,
+      新潟県: 15,
+      富山県: 16,
+      石川県: 17,
+      福井県: 18,
+      山梨県: 19,
+      長野県: 20,
+      岐阜県: 21,
+      静岡県: 22,
+      愛知県: 23,
+      三重県: 24,
+      滋賀県: 25,
+      京都府: 26,
+      大阪府: 27,
+      兵庫県: 28,
+      奈良県: 29,
+      和歌山県: 30,
+      鳥取県: 31,
+      島根県: 32,
+      岡山県: 33,
+      広島県: 34,
+      山口県: 35,
+      徳島県: 36,
+      香川県: 37,
+      愛媛県: 38,
+      高知県: 39,
+      福岡県: 40,
+      佐賀県: 41,
+      長崎県: 42,
+      熊本県: 43,
+      大分県: 44,
+      宮崎県: 45,
+      鹿児島県: 46,
+      沖縄県: 47,
+    };
+    const prefecture_id = prefectureMap[prefectureContext];
 
     // 投稿データ作成
     const postData = {
@@ -109,7 +102,6 @@ export default function Page() {
     try {
       await createPost(postData); // supabaseに送信
       alert("投稿成功！");
-      // 投稿後ひとまずトップページに遷移
       router.push("/");
     } catch (err) {
       alert("投稿失敗");
