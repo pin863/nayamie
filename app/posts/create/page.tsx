@@ -9,14 +9,22 @@ import { useRouter } from "next/navigation";
 import { useFormContext } from "./layout";
 
 export default function Page() {
-  const { setData } = useFormContext();
+  const { data, setData } = useFormContext();
   const router = useRouter();
-
-  const [title, setTitle] = useState("");
-  const [content, setContent] = useState("");
-  const [category, setCategory] = useState("");
-  const [prefecture, setPrefecture] = useState("");
-
+  // 初期値をContextから取る
+  const [title, setTitle] = useState(
+    data.find((d) => d.label === "タイトル")?.context || ""
+  );
+  const [content, setContent] = useState(
+    data.find((d) => d.label === "詳細内容")?.context || ""
+  );
+  const [category, setCategory] = useState(
+    data.find((d) => d.label === "カテゴリ")?.context || ""
+  );
+  const [prefecture, setPrefecture] = useState(
+    data.find((d) => d.label === "都道府県")?.context || ""
+  );
+  // フォームの入力項目
   const inputs = [
     {
       label: "タイトル",
@@ -34,7 +42,7 @@ export default function Page() {
       postScreen: true,
     },
   ];
-
+  // フォーム送信
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
@@ -58,34 +66,24 @@ export default function Page() {
         </h3>
 
         <form onSubmit={handleSubmit}>
+          {/* タイトルと詳細内容 */}
           <div className="text-left">
-            {inputs.map((input) => {
-              let inputValue = "";
-              let inputOnChange: React.ChangeEventHandler<
-                HTMLInputElement | HTMLTextAreaElement
-              > = () => {};
-
-              if (input.label === "タイトル") {
-                inputValue = title;
-                inputOnChange = (e) => setTitle(e.target.value);
-              } else if (input.label === "詳細内容") {
-                inputValue = content;
-                inputOnChange = (e) => setContent(e.target.value);
-              }
-
-              return (
-                <FormInput
-                  key={input.label}
-                  label={input.label}
-                  labelShow={input.labelShow}
-                  placeholder={input.placeholder}
-                  as={input.as}
-                  postScreen={input.postScreen}
-                  value={inputValue}
-                  onChange={inputOnChange}
-                />
-              );
-            })}
+            {inputs.map((input) => (
+              <FormInput
+                key={input.label}
+                label={input.label}
+                labelShow={input.labelShow}
+                placeholder={input.placeholder}
+                as={input.as}
+                postScreen={input.postScreen}
+                value={input.label === "タイトル" ? title : content}
+                onChange={(e) =>
+                  input.label === "タイトル"
+                    ? setTitle(e.target.value)
+                    : setContent(e.target.value)
+                }
+              />
+            ))}
           </div>
 
           {/* カテゴリ選択 */}
@@ -94,6 +92,7 @@ export default function Page() {
           {/* 都道府県選択 */}
           <PrefectureSelect value={prefecture} onChange={setPrefecture} />
 
+          {/* 注意書き */}
           <div className="bg-amber-100 rounded-xl p-4 border border-amber-300 text-orange-900 tracking-wider mt-4">
             <p className="font-bold pb-1">投稿前にご確認ください</p>
             <ul className="pl-3 text-sm">
@@ -102,6 +101,7 @@ export default function Page() {
             </ul>
           </div>
 
+          {/* 送信ボタン */}
           <div className="text-center mt-6">
             <Button type="submit" variant="secondary" size="sm">
               確認する

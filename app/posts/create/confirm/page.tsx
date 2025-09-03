@@ -16,7 +16,7 @@ export default function Page() {
           投稿確認画面
         </h3>
 
-        <div className="text-left tracking-wider break-words space-y-4">
+        <div className="text-left tracking-wider break-words space-y-4 whitespace-pre-wrap">
           {data.map((item, index) => (
             <div key={index}>
               <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
