@@ -1,20 +1,23 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 const categories = [
-  "カテゴリ1",
-  "カテゴリ2",
-  "カテゴリ3",
-  "カテゴリ4",
-  "カテゴリ5",
-  "カテゴリ6",
+  "ごみ問題",
+  "騒音",
+  "外国人",
+  "交通・渋滞",
+  "子育て",
+  "その他",
 ];
 
-export default function CategorySelector() {
-  const [selected, setSelected] = useState<string | null>(null);
+type Props = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
+export default function CategorySelector({ value, onChange }: Props) {
   return (
-    <div>
+    <div className="py-5">
       <label
         htmlFor="category"
         className="-mt-6 text-sm font-bold tracking-widest text-gray-500 mb-2 block"
@@ -23,14 +26,14 @@ export default function CategorySelector() {
         <span className="text-red-500">*</span>
       </label>
 
-      {/* ボタングリッド */}
       <div className="grid grid-cols-3 gap-3 justify-items-center">
         {categories.map((cat) => {
-          const isActive = selected === cat;
+          const isActive = value === cat;
           return (
             <button
               key={cat}
-              onClick={() => setSelected(cat)}
+              type="button"
+              onClick={() => onChange(cat)}
               className={`px-6 py-3 rounded-lg font-bold transition-colors w-full border border-gray-300 shadow-sm
                 ${isActive ? "bg-primary text-white" : "bg-white text-gray-700"}
                 hover:opacity-75 hover:cursor-pointer`}

@@ -5,7 +5,7 @@ import Button from "../../../components/Button";
 import { useFormContext } from "../layout";
 
 export default function Page() {
-  const data = useFormContext();
+  const { data } = useFormContext();
 
   const postId = 30;
 

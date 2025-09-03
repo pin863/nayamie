@@ -1,3 +1,6 @@
+import { ChangeEvent } from "react"; 
+
+
 export type Post = {
   id: number;
   title: string;
@@ -24,4 +27,15 @@ export type PostFromDB = {
   user?: { name: string };
   category?: { name: string };
   prefecture?: { name: string };
+};
+
+export type FormInputProps = {
+  label: string;
+  placeholder?: string;
+  labelShow?: boolean;
+  as?: "input" | "textarea";
+  rows?: number;
+  postScreen?: boolean;
+  value: string;
+  onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };

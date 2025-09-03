@@ -1,21 +1,16 @@
-import React from "react";
+"use client";
 
-export type FormInputProps = {
-  label: string;
-  placeholder?: string;
-  labelShow?: boolean;
-  as?: "input" | "textarea";
-  rows?: number;
-  postScreen?: boolean;
-};
+import type { FormInputProps } from "@/types/type";
 
 const FormInput = ({
   label,
   placeholder,
-  labelShow,
+  labelShow = true,
   as = "input",
   rows = 8,
   postScreen = false,
+  value,
+  onChange,
 }: FormInputProps) => {
   // クラスを切り替え
   const baseClass =
@@ -37,6 +32,7 @@ const FormInput = ({
           <span className="text-red-500">*</span>
         </label>
       )}
+
       {as === "textarea" ? (
         <textarea
           id={label}
@@ -44,6 +40,8 @@ const FormInput = ({
           rows={rows}
           className={styleClass}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
         />
       ) : (
         <input
@@ -52,6 +50,8 @@ const FormInput = ({
           type="text"
           className={styleClass}
           placeholder={placeholder}
+          value={value}
+          onChange={onChange}
         />
       )}
     </div>

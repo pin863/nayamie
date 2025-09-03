@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React from "react";
 
 const prefectures = [
   "北海道",
@@ -51,11 +51,14 @@ const prefectures = [
   "沖縄県",
 ];
 
-export default function PrefectureSelect() {
-  const [selected, setSelected] = useState("");
+type Props = {
+  value: string;
+  onChange: (value: string) => void;
+};
 
+export default function PrefectureSelect({ value, onChange }: Props) {
   return (
-    <div className="w-full max-w-xs">
+    <div className="w-full max-w-xs pb-3">
       <label
         htmlFor="prefecture"
         className="block mb-2 text-sm font-bold text-gray-500"
@@ -66,8 +69,8 @@ export default function PrefectureSelect() {
 
       <select
         id="prefecture"
-        value={selected}
-        onChange={(e) => setSelected(e.target.value)}
+        value={value}
+        onChange={(e) => onChange(e.target.value)}
         className="w-full py-3 px-3 rounded-md border border-gray-300 bg-white text-gray-700 shadow-sm hover:cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-300 focus:border-blue-500"
       >
         <option value="">選択してください</option>
