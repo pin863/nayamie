@@ -1,13 +1,121 @@
 "use client";
 
-import Link from "next/link";
-import Button from "../../../components/Button";
 import { useFormContext } from "../layout";
+import { useRouter } from "next/navigation";
+import Button from "../../../components/Button";
+import { createPost } from "@/app/utils/supabaseFunctions";
+import type { Tables } from "@/types/database.types";
 
 export default function Page() {
   const { data } = useFormContext();
+  const router = useRouter();
 
-  const postId = 30;
+  // DBから取れるカテゴリ
+  type Category = Tables<"categories">;
+
+  // name をユニオン型として取り出す
+  type CategoryName = Category["name"];
+  // カテゴリ名 → ID のマッピング
+  const categoryMap: Record<CategoryName, number> = {
+    ごみ問題: 1,
+    騒音: 2,
+    外国人: 3,
+    交通: 4,
+    子育て: 5,
+    その他: 6,
+  };
+
+  // 都道府県名 → ID のマッピング
+  const prefectureMap: Record<string, number> = {
+    北海道: 1,
+    青森県: 2,
+    岩手県: 3,
+    宮城県: 4,
+    秋田県: 5,
+    山形県: 6,
+    福島県: 7,
+    茨城県: 8,
+    栃木県: 9,
+    群馬県: 10,
+    埼玉県: 11,
+    千葉県: 12,
+    東京都: 13,
+    神奈川県: 14,
+    新潟県: 15,
+    富山県: 16,
+    石川県: 17,
+    福井県: 18,
+    山梨県: 19,
+    長野県: 20,
+    岐阜県: 21,
+    静岡県: 22,
+    愛知県: 23,
+    三重県: 24,
+    滋賀県: 25,
+    京都府: 26,
+    大阪府: 27,
+    兵庫県: 28,
+    奈良県: 29,
+    和歌山県: 30,
+    鳥取県: 31,
+    島根県: 32,
+    岡山県: 33,
+    広島県: 34,
+    山口県: 35,
+    徳島県: 36,
+    香川県: 37,
+    愛媛県: 38,
+    高知県: 39,
+    福岡県: 40,
+    佐賀県: 41,
+    長崎県: 42,
+    熊本県: 43,
+    大分県: 44,
+    宮崎県: 45,
+    鹿児島県: 46,
+    沖縄県: 47,
+  };
+
+  const handleSubmit = async () => {
+    // 選択中のカテゴリを取得
+    const categoryContext = data.find((d) => d.label === "カテゴリ")?.context;
+    const category_id = categoryContext ? categoryMap[categoryContext] : null;
+
+    if (!category_id) {
+      alert("カテゴリが未選択です");
+      return;
+    }
+
+    // 選択中の県
+    const prefectureContext = data.find((d) => d.label === "都道府県")?.context;
+    const prefecture_id = prefectureContext
+      ? prefectureMap[prefectureContext]
+      : null;
+
+    if (!prefecture_id) {
+      alert("都道府県が未選択です");
+      return;
+    }
+
+    // 投稿データ作成
+    const postData = {
+      title: data.find((d) => d.label === "タイトル")?.context || "",
+      content: data.find((d) => d.label === "詳細内容")?.context || "",
+      category_id,
+      prefecture_id,
+      user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // 固定値
+    };
+
+    try {
+      await createPost(postData); // supabaseに送信
+      alert("投稿成功！");
+      // 投稿後ひとまずトップページに遷移
+      router.push("/");
+    } catch (err) {
+      alert("投稿失敗");
+      console.error(err);
+    }
+  };
 
   return (
     <main className="flex justify-center">
@@ -28,20 +136,12 @@ export default function Page() {
         </div>
 
         <div className="text-center space-x-6 mt-10">
-          <Link href="/posts/create">
-            <Button variant="gray" size="sm">
-              修正する
-            </Button>
-          </Link>
-          <Link href={`/posts/${postId}`}>
-            <Button
-              variant="primary"
-              size="sm"
-              onClick={() => alert("投稿しました！")}
-            >
-              投稿する
-            </Button>
-          </Link>
+          <Button variant="gray" size="sm" onClick={() => router.back()}>
+            修正する
+          </Button>
+          <Button variant="primary" size="sm" onClick={handleSubmit}>
+            投稿する
+          </Button>
         </div>
       </div>
     </main>

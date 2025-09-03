@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useContext, useState, ReactNode } from "react";
-
+// 入力フォームのContext
 interface FormContextType {
   label: string;
   context: string;
@@ -12,7 +12,7 @@ interface FormContextValue {
   setData: (data: FormContextType[]) => void;
 }
 
-// 初期値（空 or 仮データ）
+// 初期値
 const defaultValue: FormContextValue = {
   data: [],
   setData: () => {},

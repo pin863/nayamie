@@ -39,6 +39,7 @@ export default function Home() {
               date={post.date}
               showButton={true}
               href={`/posts/${post.id}`}
+              truncate={true}
             />
           ))}
         </div>

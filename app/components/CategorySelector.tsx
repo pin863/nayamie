@@ -1,14 +1,7 @@
 "use client";
 import React from "react";
 
-const categories = [
-  "ごみ問題",
-  "騒音",
-  "外国人",
-  "交通・渋滞",
-  "子育て",
-  "その他",
-];
+const categories = ["ごみ問題", "騒音", "外国人", "交通", "子育て", "その他"];
 
 type Props = {
   value: string;

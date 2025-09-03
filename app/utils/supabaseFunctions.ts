@@ -1,6 +1,9 @@
 import { supabase } from "./supabaseClient";
+import { Database } from "../../types/database.types"; 
 
-// 最新6件の取得
+type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
+
+// DBから最新の投稿6件の取得
 export const getRecentPosts = async () => {
   const { data, error } = await supabase
     .from("posts")
@@ -34,7 +37,24 @@ export const getRecentPosts = async () => {
   }));
 };
 
+
 // 新規投稿作成
-// export const createPost = async (title: string) => {
-//   await supabase.from("posts").insert({ name: title });
-// };
+export const createPost = async (postData: PostInsert)  => {
+  const postWithUser = {
+    ...postData,
+    user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // ひとまず固定のuser_id 
+    prefecture_id: postData.prefecture_id
+  };
+
+  const { data, error } = await supabase
+    .from("posts")
+    .insert([postWithUser]);
+
+  if (error) {
+    console.error("Supabase エラー内容:", error);
+    throw new Error(`投稿に失敗しました。再度お試しください。`);
+  }
+
+  return data;
+};
+
