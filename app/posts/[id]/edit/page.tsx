@@ -28,7 +28,7 @@ export default function Page({ params }: ParamsProps) {
       postScreen: true,
     },
   ];
-  const { setData } = useFormContext();
+  const { data, setData } = useFormContext();
   const router = useRouter();
 
   const [title, setTitle] = useState("");
@@ -37,6 +37,15 @@ export default function Page({ params }: ParamsProps) {
   const [prefecture, setPrefecture] = useState("");
 
   useEffect(() => {
+    if (data) {
+      setTitle(data.find((d) => d.label === "タイトル")?.context || "");
+      setContent(data.find((d) => d.label === "詳細内容")?.context || "");
+      setCategory(data.find((d) => d.label === "カテゴリ")?.context || "");
+      setPrefecture(data.find((d) => d.label === "都道府県")?.context || "");
+      return;
+    }
+
+    // context になければ fetch
     const fetchPost = async () => {
       const post = await getPostById(Number(params.id));
       setTitle(post.title);
@@ -51,9 +60,8 @@ export default function Page({ params }: ParamsProps) {
         { label: "都道府県", context: post.prefecture.name },
       ]);
     };
-
     fetchPost();
-  }, [params.id, setData]);
+  }, [params.id, data, setData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -65,7 +73,7 @@ export default function Page({ params }: ParamsProps) {
       { label: "都道府県", context: prefecture },
     ]);
 
-    router.push(`/posts/create/${params.id}/edit/confirm`);
+    router.push(`/posts/${params.id}/edit/confirm`);
   };
 
   return (
@@ -110,6 +118,7 @@ export default function Page({ params }: ParamsProps) {
                 削除する
               </Button>
             </Link>
+            {/* 確認ボタン */}
             <Button type="submit" variant="secondary" size="sm">
               確認する
             </Button>
