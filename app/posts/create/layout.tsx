@@ -20,7 +20,7 @@ const defaultValue: FormContextValue = {
 
 const FormContext = createContext<FormContextValue>(defaultValue);
 
-export function useFormContext() {
+export function usePostContext() {
   return useContext(FormContext);
 }
 

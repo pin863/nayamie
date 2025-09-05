@@ -6,10 +6,10 @@ import Button from "@/app/components/Button";
 import CategorySelector from "@/app/components/CategorySelector";
 import PrefectureSelect from "@/app/components/PrefectureSelect";
 import { useRouter } from "next/navigation";
-import { useFormContext } from "@/app/posts/create/layout";
+import { usePostContext } from "@/app/posts/create/layout";
 
 export default function Page() {
-  const { data, setData } = useFormContext();
+  const { data, setData } = usePostContext();
   const router = useRouter();
   // 初期値をContextから取る
   const [title, setTitle] = useState(

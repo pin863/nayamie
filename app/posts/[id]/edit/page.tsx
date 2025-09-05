@@ -6,29 +6,13 @@ import FormInput from "@/app/components/FormInput";
 import Button from "@/app/components/Button";
 import CategorySelector from "@/app/components/CategorySelector";
 import PrefectureSelect from "@/app/components/PrefectureSelect";
-import { useRouter } from "next/navigation";
-import { useFormContext } from "./layout";
+import { useRouter, useParams } from "next/navigation";
+import { usePostContext } from "./layout";
 import { getPostById } from "@/app/utils/supabaseFunctions";
-import type { ParamsProps } from "@/types/type";
 
-export default function Page({ params }: ParamsProps) {
-  const inputs = [
-    {
-      label: "タイトル",
-      placeholder: "例：観光バスの路上駐車が深刻化",
-      labelShow: true,
-      postScreen: true,
-    },
-    {
-      label: "詳細内容",
-      placeholder:
-        "地域の悩みや困りごとの詳細や状況を具体的に説明してください。",
-      labelShow: true,
-      as: "textarea" as const,
-      postScreen: true,
-    },
-  ];
-  const { data, setData } = useFormContext();
+export default function Page() {
+  const { id } = useParams<{ id: string }>();
+  const { data, setData } = usePostContext();
   const router = useRouter();
 
   const [title, setTitle] = useState("");
@@ -37,10 +21,10 @@ export default function Page({ params }: ParamsProps) {
   const [prefecture, setPrefecture] = useState("");
 
   useEffect(() => {
-    if (!data || data.length === 0) {
-      getPostById(Number(params.id)).then((post) => {
+    if (!data?.length) {
+      getPostById(Number(id)).then((post) => {
         const newData = [
-          { label: "id", context: params.id },
+          { label: "id", context: id },
           { label: "タイトル", context: post.title },
           { label: "詳細内容", context: post.content },
           { label: "カテゴリ", context: post.category.name },
@@ -54,26 +38,24 @@ export default function Page({ params }: ParamsProps) {
         setPrefecture(post.prefecture.name);
       });
     } else {
-      // Context から初期値セット
       setTitle(data.find((d) => d.label === "タイトル")?.context || "");
       setContent(data.find((d) => d.label === "詳細内容")?.context || "");
       setCategory(data.find((d) => d.label === "カテゴリ")?.context || "");
       setPrefecture(data.find((d) => d.label === "都道府県")?.context || "");
     }
-  }, [params.id, data, setData]);
+  }, [id, data, setData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // 編集内容を Context に反映
     setData([
-      { label: "id", context: params.id },
+      { label: "id", context: id },
       { label: "タイトル", context: title },
       { label: "詳細内容", context: content },
       { label: "カテゴリ", context: category },
       { label: "都道府県", context: prefecture },
     ]);
 
-    router.push(`/posts/${params.id}/edit/confirm`);
+    router.push(`/posts/${id}/edit/confirm`);
   };
 
   return (
@@ -86,14 +68,14 @@ export default function Page({ params }: ParamsProps) {
           <div className="text-left">
             <FormInput
               label="タイトル"
-              placeholder={inputs[0].placeholder}
+              placeholder="例：観光バスの路上駐車が深刻化"
               postScreen
               value={title}
               onChange={(e) => setTitle(e.target.value)}
             />
             <FormInput
               label="詳細内容"
-              placeholder={inputs[1].placeholder}
+              placeholder="地域の悩みや困りごとの詳細や状況を具体的に説明してください。"
               postScreen
               as="textarea"
               value={content}
@@ -113,12 +95,11 @@ export default function Page({ params }: ParamsProps) {
           </div>
 
           <div className="text-center space-x-6 mt-10">
-            <Link href={`/posts/${params.id}/delete`}>
+            <Link href={`/posts/${id}/delete`}>
               <Button variant="red" size="sm">
                 削除する
               </Button>
             </Link>
-            {/* 確認ボタン */}
             <Button type="submit" variant="secondary" size="sm">
               確認する
             </Button>

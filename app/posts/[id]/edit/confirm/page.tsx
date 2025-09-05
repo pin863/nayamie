@@ -1,13 +1,13 @@
 "use client";
 
-import { useFormContext } from "../layout";
+import { usePostContext } from "../layout";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
 import { updatePost } from "@/app/utils/supabaseFunctions";
 import { supabase } from "@/app/utils/supabaseClient";
 
 export default function Page() {
-  const { data } = useFormContext();
+  const { data } = usePostContext();
   const router = useRouter();
 
   const handleSubmit = async () => {

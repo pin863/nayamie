@@ -2,37 +2,37 @@
 
 import { createContext, useContext, useState, ReactNode } from "react";
 // 入力フォームのContext
-interface FormContextType {
+interface PostContextType {
   label: string;
   context: string;
 }
 
-interface FormContextValue {
-  data: FormContextType[];
-  setData: (data: FormContextType[]) => void;
+interface PostContextValue {
+  data: PostContextType[];
+  setData: (data: PostContextType[]) => void;
 }
 
 // 初期値
-const defaultValue: FormContextValue = {
+const defaultValue: PostContextValue = {
   data: [],
   setData: () => {},
 };
 
-const FormContext = createContext<FormContextValue>(defaultValue);
+const PostContext = createContext<PostContextValue>(defaultValue);
 
-export function useFormContext() {
-  return useContext(FormContext);
+export function usePostContext() {
+  return useContext(PostContext);
 }
 
 interface PostsLayoutProps {
   children: ReactNode;
 }
 export default function PostsLayout({ children }: PostsLayoutProps) {
-  const [data, setData] = useState<FormContextType[]>([]);
+  const [data, setData] = useState<PostContextType[]>([]);
 
   return (
-    <FormContext.Provider value={{ data, setData }}>
+    <PostContext.Provider value={{ data, setData }}>
       {children}
-    </FormContext.Provider>
+    </PostContext.Provider>
   );
 }

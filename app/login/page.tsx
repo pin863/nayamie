@@ -1,16 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import FormInput from "../components/FormInput";
-import Button from "../components/Button";
+import FormInput from "@/app/components/FormInput";
+import Button from "@/app/components/Button";
+import { useState } from "react";
 
-export default function page() {
+export default function Page() {
   //FormInputの要素
   const inputs = [
-    { label: "メールアドレス", placeholder: "メールアドレス" },
-    { label: "パスワード", placeholder: "パスワード" },
+    {
+      name: "email",
+      label: "メールアドレス",
+    },
+    {
+      name: "password",
+      label: "パスワード",
+    },
   ];
-
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   return (
     <>
       <main className="flex justify-center">
@@ -21,9 +29,14 @@ export default function page() {
           <div className="text-left">
             {inputs.map((input) => (
               <FormInput
-                key={input.label}
+                key={input.name}
                 label={input.label}
-                placeholder={input.placeholder}
+                value={input.name === "email" ? email : password}
+                onChange={(e) =>
+                  input.name === "email"
+                    ? setEmail(e.target.value)
+                    : setPassword(e.target.value)
+                }
               />
             ))}
           </div>
