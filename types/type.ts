@@ -19,6 +19,7 @@ export interface ParamsProps {
     id: string; 
   };
 }
+
 export type Comment = {
   content: string;
   username: string;
