@@ -1,12 +1,12 @@
 "use client";
 
-import React, { useState } from "react";
-import FormInput from "../../components/FormInput";
-import Button from "../../components/Button";
-import CategorySelector from "../../components/CategorySelector";
+import { useState } from "react";
+import FormInput from "@/app/components/FormInput";
+import Button from "@/app/components/Button";
+import CategorySelector from "@/app/components/CategorySelector";
 import PrefectureSelect from "@/app/components/PrefectureSelect";
 import { useRouter } from "next/navigation";
-import { useFormContext } from "./layout";
+import { useFormContext } from "@/app/posts/create/layout";
 
 export default function Page() {
   const { data, setData } = useFormContext();
@@ -101,7 +101,7 @@ export default function Page() {
             </ul>
           </div>
 
-          {/* 送信ボタン */}
+          {/* 確認ボタン */}
           <div className="text-center mt-6">
             <Button type="submit" variant="secondary" size="sm">
               確認する

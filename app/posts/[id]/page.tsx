@@ -24,7 +24,7 @@ export default async function Home({ params }: ParamsProps) {
     <main>
       <div className="space-y-8 mt-10">
         <div className="w-1/2 mx-auto">
-          <PostComponent {...post} />
+          <PostComponent {...post} isOwner={true} />
         </div>
 
         <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">

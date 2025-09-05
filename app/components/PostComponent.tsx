@@ -22,8 +22,6 @@ export default function PostComponent({
   // contentが50文字以上なら省略する
   const displayContent = truncateContent(content, 50, truncate);
 
-  const postId = 30;
-
   return (
     <div className="bg-white border border-gray-300 shadow-md p-6 rounded-2xl text-gray-700 space-y-3">
       <div className="flex justify-between items-center">
@@ -44,7 +42,7 @@ export default function PostComponent({
 
         {/* 編集ボタン */}
         {isOwner && (
-          <Link href={`/posts/${postId}/edit`}>
+          <Link href={`/posts/${id}/edit`}>
             <Button size="sm" shape="square" variant="gray">
               編集
             </Button>
