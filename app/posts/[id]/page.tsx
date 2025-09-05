@@ -1,19 +1,9 @@
 import Button from "@/app/components/Button";
 import PostComponent from "../../components/PostComponent";
+import { getPostById } from "@/app/utils/supabaseFunctions";
+import type { ParamsProps } from "@/types/type";
 
-export default function Home() {
-  const dummy = {
-    category: "ごみ問題",
-    title: "タイトルですタイトルです",
-    content:
-      "本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です本文です",
-    prefecture: "東京都",
-    date: "2025年8月1日",
-    username: "田中たろう",
-    showButton: false,
-    isOwner: true,
-  };
-
+export default async function Home({ params }: ParamsProps) {
   const comments = [
     {
       content: "コメントコメントコメントコメントコメント",
@@ -27,11 +17,14 @@ export default function Home() {
     },
   ];
 
+  const postId = Number(params.id);
+  const post = await getPostById(postId);
+
   return (
     <main>
       <div className="space-y-8 mt-10">
         <div className="w-1/2 mx-auto">
-          <PostComponent {...dummy} />
+          <PostComponent {...post} />
         </div>
 
         <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">

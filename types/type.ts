@@ -5,15 +5,20 @@ export type Post = {
   id: number;
   title: string;
   content: string;
-  category: string;
-  prefecture: string;
-  date: string;
+  date?: string;
   username: string;
   showButton?: boolean;
   href?: string;
   isOwner?: boolean;
+  user: { name: string };
+  category: { name: string };
+  prefecture: { name: string };
 };
-
+export interface ParamsProps {
+  params: {
+    id: string; 
+  };
+}
 export type Comment = {
   content: string;
   username: string;

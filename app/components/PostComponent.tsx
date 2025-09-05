@@ -5,6 +5,7 @@ import { truncateContent } from "../utils/truncateContent";
 import Link from "next/link";
 
 export default function PostComponent({
+  id,
   title,
   category,
   prefecture,
@@ -17,7 +18,7 @@ export default function PostComponent({
   truncate = false,
 }: Post & { truncate?: boolean }) {
   // カテゴリによって色を変更
-  const style = getCategoryStyle(category) as React.CSSProperties;
+  const style = getCategoryStyle(category.name) as React.CSSProperties;
   // contentが50文字以上なら省略する
   const displayContent = truncateContent(content, 50, truncate);
 
@@ -29,9 +30,9 @@ export default function PostComponent({
         <div className="flex space-x-4 justify-center items-center">
           {/* カテゴリ、都道府県、日付 */}
           <div style={style} className="px-4 py-2 rounded-full text-sm">
-            <p>{category}</p>
+            <p>{category.name}</p>
           </div>
-          <p className="">{prefecture}</p>
+          <p className="">{prefecture.name}</p>
         </div>
         <p className="text-sm text-gray-400">{date}</p>
       </div>
@@ -52,7 +53,7 @@ export default function PostComponent({
 
         {/* 詳しく見るボタン */}
         {showButton && href && (
-          <Link href={href}>
+          <Link href={`/posts/${id}`}>
             <Button size="sm" shape="square">
               詳しく見る
             </Button>

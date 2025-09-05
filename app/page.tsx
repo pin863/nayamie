@@ -13,7 +13,7 @@ export default function Home() {
   useEffect(() => {
     const getPosts = async () => {
       const posts = await getRecentPosts();
-      setPosts(posts ?? []);
+      setPosts(posts);
       console.log(posts);
     };
     getPosts();

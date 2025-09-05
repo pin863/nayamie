@@ -26,15 +26,56 @@ export const getRecentPosts = async () => {
     return [];
   }
 
-  return (data ?? []).map((p) => ({
-    id: p.id,
-    title: p.title,
-    content: p.content,
-    date: new Date(p.created_at).toLocaleDateString("ja-JP"),
-    username: p.user?.name ?? "名無しさん",
-    category: p.category?.name ?? "未分類",
-    prefecture: p.prefecture?.name ?? "未設定",
+  return data.map((d) => ({
+    id: d.id,
+    title: d.title,
+    content: d.content,
+    date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }),
+    username: d.user.name,
+    user: d.user,
+    category: d.category,
+    prefecture: d.prefecture,
+    showButton: true,
   }));
+};
+
+// DBから特定のIDの1件を取得
+export const getPostById = async (id: number) => {
+  const { data, error } = await supabase
+    .from("posts")
+    .select(
+    `
+    id,
+    title,
+    content,
+    created_at,
+    user:user_id ( name ),
+    category:category_id ( name ),
+    prefecture:prefecture_id ( name )
+  `
+    )
+    .eq("id", id)
+    .single();
+  if (error) throw error;
+  return {
+    id: data.id,
+    title: data.title,
+    content: data.content,
+    date: new Date(data.created_at).toLocaleDateString("ja-JP", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  }),
+    username: data.user.name,
+    user: data.user,
+    category: data.category,
+    prefecture: data.prefecture,
+    showButton: true,
+  };
 };
 
 
