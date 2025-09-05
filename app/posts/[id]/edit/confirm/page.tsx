@@ -3,7 +3,7 @@
 import { useFormContext } from "../layout";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
-import { createPost } from "@/app/utils/supabaseFunctions";
+import { updatePost } from "@/app/utils/supabaseFunctions";
 import { supabase } from "@/app/utils/supabaseClient";
 
 export default function Page() {
@@ -90,7 +90,13 @@ export default function Page() {
     };
     const prefecture_id = prefectureMap[prefectureContext];
 
-    // 投稿データ作成
+    // 投稿編集
+    const postIdString = data.find((d) => d.label === "id")?.context;
+    if (!postIdString) {
+      alert("投稿IDが見つかりません");
+      return;
+    }
+    const postId = Number(postIdString);
     const postData = {
       title: data.find((d) => d.label === "タイトル")?.context || "",
       content: data.find((d) => d.label === "詳細内容")?.context || "",
@@ -100,7 +106,7 @@ export default function Page() {
     };
 
     try {
-      await createPost(postData);
+      await updatePost(postId, postData);
       alert("編集を反映しました。");
       router.push("/");
     } catch (err) {
@@ -116,15 +122,17 @@ export default function Page() {
           編集確認画面
         </h3>
 
-        <div className="text-left tracking-wider break-words space-y-4">
-          {data.map((item, index) => (
-            <div key={index}>
-              <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
-                {item.label}
-              </h4>
-              <p className="pl-3 pt-3">{item.context}</p>
-            </div>
-          ))}
+        <div className="text-left tracking-wider break-words space-y-4 whitespace-pre-wrap">
+          {data
+            .filter((item) => item.label !== "id") // idは表示しない
+            .map((item, index) => (
+              <div key={index}>
+                <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
+                  {item.label}
+                </h4>
+                <p className="pl-3 pt-3">{item.context}</p>
+              </div>
+            ))}
         </div>
 
         <div className="text-center space-x-6 mt-10">

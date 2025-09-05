@@ -37,36 +37,36 @@ export default function Page({ params }: ParamsProps) {
   const [prefecture, setPrefecture] = useState("");
 
   useEffect(() => {
-    if (data) {
+    if (!data || data.length === 0) {
+      getPostById(Number(params.id)).then((post) => {
+        const newData = [
+          { label: "id", context: params.id },
+          { label: "タイトル", context: post.title },
+          { label: "詳細内容", context: post.content },
+          { label: "カテゴリ", context: post.category.name },
+          { label: "都道府県", context: post.prefecture.name },
+        ];
+        setData(newData);
+
+        setTitle(post.title);
+        setContent(post.content);
+        setCategory(post.category.name);
+        setPrefecture(post.prefecture.name);
+      });
+    } else {
+      // Context から初期値セット
       setTitle(data.find((d) => d.label === "タイトル")?.context || "");
       setContent(data.find((d) => d.label === "詳細内容")?.context || "");
       setCategory(data.find((d) => d.label === "カテゴリ")?.context || "");
       setPrefecture(data.find((d) => d.label === "都道府県")?.context || "");
-      return;
     }
-
-    // context になければ fetch
-    const fetchPost = async () => {
-      const post = await getPostById(Number(params.id));
-      setTitle(post.title);
-      setContent(post.content);
-      setCategory(post.category.name);
-      setPrefecture(post.prefecture.name);
-
-      setData([
-        { label: "タイトル", context: post.title },
-        { label: "詳細内容", context: post.content },
-        { label: "カテゴリ", context: post.category.name },
-        { label: "都道府県", context: post.prefecture.name },
-      ]);
-    };
-    fetchPost();
   }, [params.id, data, setData]);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    // 編集内容を Context に反映
     setData([
+      { label: "id", context: params.id },
       { label: "タイトル", context: title },
       { label: "詳細内容", context: content },
       { label: "カテゴリ", context: category },

@@ -99,3 +99,23 @@ export const createPost = async (postData: PostInsert)  => {
   return data;
 };
 
+// 投稿編集
+export const updatePost = async (postId: number, postData: PostInsert) => {
+  const postWithUser = {
+    ...postData,
+    user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // 固定ユーザーID
+    prefecture_id: postData.prefecture_id,
+  };
+
+  const { data, error } = await supabase
+    .from("posts")
+    .update(postWithUser)
+    .eq("id", postId);
+
+  if (error) {
+    console.error("Supabase エラー内容:", error);
+    throw new Error(`投稿の更新に失敗しました。再度お試しください。`);
+  }
+
+  return data;
+};
