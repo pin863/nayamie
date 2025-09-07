@@ -14,6 +14,11 @@ export type Post = {
   category: { name: string };
   prefecture: { name: string };
 };
+// export interface ParamsProps {
+//   params: Promise<{
+//     id: string; 
+//   }>;
+// }
 export interface ParamsProps {
   params: {
     id: string; 

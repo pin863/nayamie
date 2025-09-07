@@ -7,8 +7,8 @@ import Button from "@/app/components/Button";
 import CategorySelector from "@/app/components/CategorySelector";
 import PrefectureSelect from "@/app/components/PrefectureSelect";
 import { useRouter, useParams } from "next/navigation";
-import { usePostContext } from "./layout";
 import { getPostById } from "@/app/utils/supabaseFunctions";
+import { usePostContext } from "@/app/context/postcontext";
 
 export default function Page() {
   const { id } = useParams<{ id: string }>();

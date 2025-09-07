@@ -1,10 +1,10 @@
 "use client";
 
-import { usePostContext } from "../layout";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
 import { updatePost } from "@/app/utils/supabaseFunctions";
 import { supabase } from "@/app/utils/supabaseClient";
+import { usePostContext } from "@/app/context/postcontext";
 
 export default function Page() {
   const { data } = usePostContext();

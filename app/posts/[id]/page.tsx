@@ -4,6 +4,9 @@ import { getPostById } from "@/app/utils/supabaseFunctions";
 import type { ParamsProps } from "@/types/type";
 
 export default async function Home({ params }: ParamsProps) {
+  // const postId = use(params).id;
+  // const post = await getPostById(Number(postId));
+
   const comments = [
     {
       content: "コメントコメントコメントコメントコメント",

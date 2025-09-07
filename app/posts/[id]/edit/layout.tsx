@@ -1,28 +1,6 @@
 "use client";
-
-import { createContext, useContext, useState, ReactNode } from "react";
-// 入力フォームのContext
-interface PostContextType {
-  label: string;
-  context: string;
-}
-
-interface PostContextValue {
-  data: PostContextType[];
-  setData: (data: PostContextType[]) => void;
-}
-
-// 初期値
-const defaultValue: PostContextValue = {
-  data: [],
-  setData: () => {},
-};
-
-const PostContext = createContext<PostContextValue>(defaultValue);
-
-export function usePostContext() {
-  return useContext(PostContext);
-}
+import { PostContext, PostContextType } from "@/app/context/postcontext";
+import { useState, ReactNode } from "react";
 
 interface PostsLayoutProps {
   children: ReactNode;
