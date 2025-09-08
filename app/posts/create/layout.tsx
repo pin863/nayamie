@@ -1,7 +1,7 @@
 "use client";
 
 import { ReactNode } from "react";
-import { PostsContextProvider } from "./context";
+import { PostsContextProvider } from "./context.tsx";
 
 interface PostsLayoutProps {
   children: ReactNode;
