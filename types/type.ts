@@ -50,3 +50,11 @@ export type FormInputProps = {
   value: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
+
+export type DeletePostType = {
+  id: number;
+  title: string;
+  content: string;
+  category: { name: string };
+  prefecture: { name: string };
+};

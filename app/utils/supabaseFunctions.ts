@@ -119,3 +119,18 @@ export const updatePost = async (postId: number, postData: PostInsert) => {
 
   return data;
 };
+
+// 投稿削除
+export const deletePost = async (postId: number) => {
+  const { error } = await supabase
+    .from("posts")
+    .delete()
+    .eq("id", postId);
+
+  if (error) {
+    console.error("Supabase エラー内容:", error);
+    throw new Error(`投稿の削除に失敗しました。再度お試しください。`);
+  }
+
+  return true;
+};

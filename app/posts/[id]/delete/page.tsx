@@ -1,28 +1,52 @@
 "use client";
 
-import Link from "next/link";
-import Button from "../../../components/Button";
+import { useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { getPostById, deletePost } from "@/app/utils/supabaseFunctions";
+import Button from "@/app/components/Button";
+import { DeletePostType } from "@/types/type";
 
-export default function Page() {
-  const postId = 30;
-  const inputs = [
-    {
-      label: "タイトル",
-      value: "texttext",
-    },
-    {
-      label: "詳細内容",
-      value: "texttexttexttexttexttexttexttexttexttexttexttexttexttext",
-    },
-    {
-      label: "カテゴリ",
-      value: "カテゴリ1",
-    },
-    {
-      label: "都道府県",
-      value: "東京都",
-    },
-  ];
+export default function DeletePage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const router = useRouter();
+  const [post, setPost] = useState<DeletePostType | null>(null);
+
+  useEffect(() => {
+    const fetchPost = async () => {
+      try {
+        const resolvedParams = await params;
+        const data = await getPostById(Number(resolvedParams.id));
+        setPost(data);
+      } catch (err) {
+        console.error("投稿の取得に失敗しました", err);
+        alert("投稿の取得に失敗しました");
+        router.back();
+      }
+    };
+    fetchPost();
+  }, [params, router]);
+
+  const handleDelete = async () => {
+    if (!post) return;
+
+    if (!confirm("本当にこの投稿を削除しますか？")) return;
+
+    try {
+      await deletePost(post.id);
+      alert("投稿を削除しました。");
+      router.push("/");
+    } catch (err) {
+      console.error(err);
+      alert("削除に失敗しました。");
+    }
+  };
+
+  if (!post) {
+    return <p className="text-center mt-10">読み込み中...</p>;
+  }
 
   return (
     <main className="flex justify-center">
@@ -32,31 +56,39 @@ export default function Page() {
         </h3>
 
         <div className="text-left tracking-wider break-words space-y-4">
-          {inputs.map((input) => (
-            <div key={input.label}>
-              <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
-                {input.label}
-              </h4>
-              <p className="pl-3 pt-3">{input.value}</p>
-            </div>
-          ))}
+          <div>
+            <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
+              タイトル
+            </h4>
+            <p className="pl-3 pt-3">{post.title}</p>
+          </div>
+          <div>
+            <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
+              詳細内容
+            </h4>
+            <p className="pl-3 pt-3">{post.content}</p>
+          </div>
+          <div>
+            <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
+              カテゴリ
+            </h4>
+            <p className="pl-3 pt-3">{post.category?.name || "-"}</p>
+          </div>
+          <div>
+            <h4 className="pb-1 border-b pl-3 mt-6 font-bold border-gray-300">
+              都道府県
+            </h4>
+            <p className="pl-3 pt-3">{post.prefecture?.name || "-"}</p>
+          </div>
         </div>
 
         <div className="text-center space-x-6 mt-10">
-          <Link href={`/posts/${postId}/edit`}>
-            <Button variant="gray" size="sm">
-              編集にもどる
-            </Button>
-          </Link>
-          <Link href="/">
-            <Button
-              variant="red"
-              size="sm"
-              onClick={() => alert("投稿を削除しました！")}
-            >
-              削除する
-            </Button>
-          </Link>
+          <Button variant="gray" size="sm" onClick={() => router.back()}>
+            もどる
+          </Button>
+          <Button variant="primary" size="sm" onClick={handleDelete}>
+            削除する
+          </Button>
         </div>
       </div>
     </main>

@@ -1,12 +1,17 @@
 import Button from "@/app/components/Button";
-import PostComponent from "../../components/PostComponent";
+import PostComponent from "@/app/components/PostComponent";
 import { getPostById } from "@/app/utils/supabaseFunctions";
-import type { ParamsProps } from "@/types/type";
+import { use } from "react";
 
-export default async function Home({ params }: ParamsProps) {
+export default function Home({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = use(params);
+  const postId = Number(resolvedParams.id);
+
+  // DB から投稿データを取得
+  const post = use(getPostById(postId));
+
   // const postId = use(params).id;
   // const post = await getPostById(Number(postId));
-
   const comments = [
     {
       content: "コメントコメントコメントコメントコメント",
@@ -19,9 +24,6 @@ export default async function Home({ params }: ParamsProps) {
       username: "佐藤はなこ",
     },
   ];
-
-  const postId = Number(params.id);
-  const post = await getPostById(postId);
 
   return (
     <main>
