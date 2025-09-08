@@ -1,6 +1,6 @@
 "use client";
 
-import { usePostContext } from "@/app/posts/create/layout";
+import { usePostContext } from "../context";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
 import { createPost } from "@/app/utils/supabaseFunctions";
