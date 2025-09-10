@@ -6,7 +6,7 @@ import Button from "@/app/components/Button";
 import CategorySelector from "@/app/components/CategorySelector";
 import PrefectureSelect from "@/app/components/PrefectureSelect";
 import { useRouter } from "next/navigation";
-import { usePostContext } from "./context.tsx";
+import { usePostContext } from "./context";
 
 export default function Page() {
   const { data, setData } = usePostContext();
