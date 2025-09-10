@@ -2,6 +2,8 @@ import { supabase } from "@/app/utils/supabaseClient";
 import { Database } from "@/types/database.types"; 
 
 type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
+type CommentFromDB = Database["public"]["Tables"]["comments"]["Row"];
+
 
 // DBから最新の投稿6件の取得
 export const getRecentPosts = async () => {
@@ -133,4 +135,34 @@ export const deletePost = async (postId: number) => {
   }
 
   return true;
+};
+
+// DBからコメントを取得
+export const getCommentsByPostId = async (postId: number) => {
+  const { data, error } = await supabase
+    .from("comments")
+    .select(`
+      id,
+      content,
+      created_at,
+      user:user_id ( name )
+    `)
+    .eq("post_id", postId)
+    .order("created_at", { ascending: true });
+
+  if (error) {
+    console.error(error);
+    return [];
+  }
+
+  return data.map((d) => ({
+    id: d.id,
+    content: d.content,
+    username: d.user.name,
+    date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    }),
+  }));
 };

@@ -1,6 +1,9 @@
 import Button from "@/app/components/Button";
 import PostComponent from "@/app/components/PostComponent";
-import { getPostById } from "@/app/utils/supabaseFunctions";
+import {
+  getPostById,
+  getCommentsByPostId,
+} from "@/app/utils/supabaseFunctions";
 // import { use } from "react";
 
 export default async function Home({ params }: { params: { id: string } }) {
@@ -10,18 +13,7 @@ export default async function Home({ params }: { params: { id: string } }) {
 
   // const postId = use(params).id;
   // const post = await getPostById(Number(postId));
-  const comments = [
-    {
-      content: "コメントコメントコメントコメントコメント",
-      date: "2025年8月1日",
-      username: "鈴木たろう",
-    },
-    {
-      content: "別のコメントです",
-      date: "2025年8月2日",
-      username: "佐藤はなこ",
-    },
-  ];
+  const comments = await getCommentsByPostId(Number(params.id));
 
   return (
     <main>
@@ -34,9 +26,11 @@ export default async function Home({ params }: { params: { id: string } }) {
           <h4 className="text-lg px-4 pb-2">コメント</h4>
           <div className="bg-gray-100 p-4 rounded-md">
             <textarea
-              className="bg-white border border-gray-300 rounded w-full placeholder:tracking-wider placeholder:text-sm placeholder:p-1"
+              className="bg-white border-2 border-gray-300 rounded w-full placeholder:tracking-wider placeholder:text-sm placeholder:p-1 
+              focus:outline-none focus:border-blue-400"
               placeholder="この問題について意見を共有しましょう"
-            ></textarea>
+            />
+
             <div className="text-right mt-2">
               <Button size="sm" variant="secondary">
                 コメント投稿
