@@ -2,13 +2,6 @@ import { supabase } from "@/app/utils/supabaseClient";
 import { Database } from "@/types/database.types"; 
 
 type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
-// type CommentFromDB = Database["public"]["Tables"]["comments"]["Row"];
-// type CommentInsert = {
-//   post_id: number;
-//   user_id: string;
-//   content: string;
-// };
-
 
 // DBから最新の投稿6件の取得
 export const getRecentPosts = async () => {
@@ -173,34 +166,26 @@ export const getCommentsByPostId = async (postId: number) => {
 };
 
 // コメント投稿
-// export const createComment = async (postId: number, content: string) => {
-//   const commentData: CommentInsert = {
-//     post_id: postId,
-//     user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // 固定ユーザー
-//     content,
-//   };
+export const createComment = async (postId: number, content: string) => {
+  const { data, error } = await supabase
+    .from("comments")
+    .insert([{ post_id: postId, user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", content }]) // 固定ユーザーID
+    .select(`id, content, created_at, user:user_id(name)`)
+    .single(); 
 
-//   const { data, error } = await supabase
-//     .from("comments")
-//     .insert([commentData]);
+  if (error || !data) {
+    console.error("Supabase エラー:", error);
+    throw new Error("コメントの投稿に失敗しました。");
+  }
 
-//   if (error) {
-//     console.error("Supabase エラー:", error);
-//     throw new Error("コメントの投稿に失敗しました。");
-//   }
-
-//   if (!data || data.length === 0) {
-//     throw new Error("コメントの投稿に失敗しました（データが空です）。");
-//   }
-
-//   return {
-//     id: data[0].id,
-//     content: data[0].content,
-//     username: "固定ユーザー",
-//     date: new Date(data[0].created_at).toLocaleDateString("ja-JP", {
-//       year: "numeric",
-//       month: "numeric",
-//       day: "numeric",
-//     }),
-//   };
-// };
+  return {
+    id: data.id,
+    content: data.content,
+    username: data.user.name,
+    date: new Date(data.created_at).toLocaleDateString("ja-JP", {
+      year: "numeric",
+      month: "numeric",
+      day: "numeric",
+    }),
+  };
+};

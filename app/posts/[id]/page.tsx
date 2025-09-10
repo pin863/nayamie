@@ -1,5 +1,5 @@
-import Button from "@/app/components/Button";
 import PostComponent from "@/app/components/PostComponent";
+import CommentSection from "@/app/components/CommentSection";
 import {
   getPostById,
   getCommentsByPostId,
@@ -14,6 +14,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   // const postId = use(params).id;
   // const post = await getPostById(Number(postId));
   const comments = await getCommentsByPostId(Number(params.id));
+  const postId = Number(params.id);
 
   return (
     <main>
@@ -22,7 +23,7 @@ export default async function Home({ params }: { params: { id: string } }) {
           <PostComponent {...post} isOwner={true} />
         </div>
 
-        <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">
+        {/* <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">
           <h4 className="text-lg px-4 pb-2">コメント</h4>
           <div className="bg-gray-100 p-4 rounded-md">
             <textarea
@@ -56,7 +57,9 @@ export default async function Home({ params }: { params: { id: string } }) {
               ))
             )}
           </div>
-        </div>
+        </div> */}
+        {/* コメント欄 */}
+        <CommentSection postId={postId} initialComments={comments} />
       </div>
     </main>
   );
