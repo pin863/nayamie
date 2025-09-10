@@ -3,14 +3,17 @@ import PostComponent from "../components/PostComponent";
 
 export default function Home() {
   const dummy = {
-    category: "ごみ問題",
+    id: 1,
+    category: { name: "ごみ問題" },
+    prefecture: { name: "東京都" },
     title: "タイトルですタイトルです",
     content: "本文です本文です本文です本文です本文です本文です本文です",
-    prefecture: "東京都",
     date: "2025年8月1日",
     username: "田中たろう",
     showButton: true,
+    user: { name: "田中たろう" },
   };
+
   return (
     <main>
       <Searchbar />
@@ -20,33 +23,20 @@ export default function Home() {
           <span className=" font-bold text-xl">XX</span>件見つかりました。
         </p>
         <div className="grid grid-cols-3 gap-4 ">
-          <PostComponent
-            category={dummy.category}
-            prefecture={dummy.prefecture}
-            date={dummy.date}
-            title={dummy.title}
-            content={dummy.content}
-            username={dummy.username}
-            showButton={dummy.showButton}
-          />
-          <PostComponent
-            category={dummy.category}
-            prefecture={dummy.prefecture}
-            date={dummy.date}
-            title={dummy.title}
-            content={dummy.content}
-            username={dummy.username}
-            showButton={dummy.showButton}
-          />
-          <PostComponent
-            category={dummy.category}
-            prefecture={dummy.prefecture}
-            date={dummy.date}
-            title={dummy.title}
-            content={dummy.content}
-            username={dummy.username}
-            showButton={dummy.showButton}
-          />
+          {[1, 2, 3].map((_, i) => (
+            <PostComponent
+              key={i}
+              id={dummy.id}
+              category={dummy.category}
+              prefecture={dummy.prefecture}
+              date={dummy.date}
+              title={dummy.title}
+              content={dummy.content}
+              username={dummy.username}
+              showButton={dummy.showButton}
+              user={dummy.user}
+            />
+          ))}
         </div>
       </div>
     </main>

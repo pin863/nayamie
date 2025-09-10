@@ -1,14 +1,12 @@
 import Button from "@/app/components/Button";
 import PostComponent from "@/app/components/PostComponent";
 import { getPostById } from "@/app/utils/supabaseFunctions";
-import { use } from "react";
+// import { use } from "react";
 
-export default function Home({ params }: { params: Promise<{ id: string }> }) {
-  const resolvedParams = use(params);
-  const postId = Number(resolvedParams.id);
-
+export default async function Home({ params }: { params: { id: string } }) {
+  const post = await getPostById(Number(params.id));
   // DB から投稿データを取得
-  const post = use(getPostById(postId));
+  // const post = use(getPostById(postId));
 
   // const postId = use(params).id;
   // const post = await getPostById(Number(postId));
