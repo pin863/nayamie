@@ -1,38 +1,16 @@
 "use client";
 
-import { createContext, useContext, useState, ReactNode } from "react";
-// 入力フォームのContext
-interface FormContextType {
-  label: string;
-  context: string;
-}
-
-interface FormContextValue {
-  data: FormContextType[];
-  setData: (data: FormContextType[]) => void;
-}
-
-// 初期値
-const defaultValue: FormContextValue = {
-  data: [],
-  setData: () => {},
-};
-
-const FormContext = createContext<FormContextValue>(defaultValue);
-
-export function usePostContext() {
-  return useContext(FormContext);
-}
+import { ReactNode } from "react";
+import { PostsContextProvider } from "./context.tsx";
 
 interface PostsLayoutProps {
   children: ReactNode;
 }
-export default function PostsLayout({ children }: PostsLayoutProps) {
-  const [data, setData] = useState<FormContextType[]>([]);
 
+export default function PostsLayout({ children }: PostsLayoutProps) {
   return (
-    <FormContext.Provider value={{ data, setData }}>
+    <PostsContextProvider>
       {children}
-    </FormContext.Provider>
+    </PostsContextProvider>
   );
 }
