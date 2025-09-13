@@ -4,15 +4,16 @@ import Button from "@/app/components/Button";
 import Link from "next/link";
 import { getRecentPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
-// import {createServerComponentClient } from '@supabase/ssr'
-// import { cookies } from 'next/headers'
-// import type { Database } from '@/types/database.types'
+// import { createClient } from "./utils/server";
+// import type { Database } from "@/types/database.types";
 
 export default async function Home() {
-  // const supabase = createServerComponentClient<Database>({
-  //   cookies,
+  // const supabase = await createClient<Database>();
 
-  // })
+  // // セッションの取得
+  // const {
+  //   data: { session },
+  // } = await supabase.auth.getSession();
 
   // 最近の投稿のデータ取得
   const posts: Post[] = await getRecentPosts();

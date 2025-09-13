@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Header from "@/app/components/Header";
+import SupabaseListener from "@/app/components/Supabase-listener";
 
 export const metadata: Metadata = {
   title: "ナヤミエ",
@@ -15,7 +15,7 @@ export default function RootLayout({
   return (
     <html lang="ja">
       <body className="bg-basecolor text-gray-700 mx-30 tracking-wide">
-        <Header />
+        <SupabaseListener />
         {children}
       </body>
     </html>
