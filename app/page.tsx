@@ -1,23 +1,21 @@
-"use client";
-
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
 import Button from "@/app/components/Button";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { getRecentPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
+// import {createServerComponentClient } from '@supabase/ssr'
+// import { cookies } from 'next/headers'
+// import type { Database } from '@/types/database.types'
 
-export default function Home() {
-  const [posts, setPosts] = useState<Post[]>([]);
-  useEffect(() => {
-    const getPosts = async () => {
-      const posts = await getRecentPosts();
-      setPosts(posts);
-      console.log(posts);
-    };
-    getPosts();
-  }, []);
+export default async function Home() {
+  // const supabase = createServerComponentClient<Database>({
+  //   cookies,
+
+  // })
+
+  // 最近の投稿のデータ取得
+  const posts: Post[] = await getRecentPosts();
 
   return (
     <main className="py-6">
