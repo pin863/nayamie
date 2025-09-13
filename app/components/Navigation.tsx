@@ -1,4 +1,5 @@
 "use client";
+
 import Button from "@/app/components/Button";
 import type { Session } from "@supabase/supabase-js";
 import { useState } from "react";
@@ -10,9 +11,7 @@ type NaviProps = {
 
 export default function Navigation({ session }: NaviProps) {
   const [openMenu, setOpenMenu] = useState(false);
-  const handleMenuOpen = () => {
-    setOpenMenu(!openMenu);
-  };
+  const handleMenuOpen = () => setOpenMenu(!openMenu);
 
   return (
     <>
@@ -20,6 +19,7 @@ export default function Navigation({ session }: NaviProps) {
       <div className="hidden md:flex items-center space-x-6 font-semibold">
         {session ? (
           <>
+            <p className="text-blue-400">ログイン中</p>
             <Link href="/posts/create">
               <Button variant="primary" size="sm">
                 投稿する
@@ -33,6 +33,7 @@ export default function Navigation({ session }: NaviProps) {
           </>
         ) : (
           <>
+            <p className="text-red-400">ログインしていません</p>
             <Link href="/login">
               <Button variant="primary" size="sm">
                 ログイン
