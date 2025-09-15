@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-import FormInput from "@/app/components/FormInput";
+// import FormInput from "@/app/components/FormInput";
 import Button from "@/app/components/Button";
 import { useState } from "react";
 import { supabase } from "@/app/utils/supabaseClient";
