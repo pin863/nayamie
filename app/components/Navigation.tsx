@@ -5,11 +5,11 @@ import type { Session } from "@supabase/supabase-js";
 import { useState } from "react";
 import Link from "next/link";
 
-type NaviProps = {
+type NavigationProps = {
   session: Session | null;
 };
 
-export default function Navigation({ session }: NaviProps) {
+export default function Navigation({ session }: NavigationProps) {
   const [openMenu, setOpenMenu] = useState(false);
   const handleMenuOpen = () => setOpenMenu(!openMenu);
 
