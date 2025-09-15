@@ -41,13 +41,14 @@ export type PostFromDB = {
 };
 
 export type FormInputProps = {
+  // register?: any; 
   label: string;
   placeholder?: string;
   labelShow?: boolean;
   as?: "input" | "textarea";
   rows?: number;
   postScreen?: boolean;
-  value: string;
+  value?: string;
   onChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 };
 

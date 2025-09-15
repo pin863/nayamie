@@ -3,6 +3,7 @@
 import type { FormInputProps } from "@/types/type";
 
 const FormInput = ({
+  // register,
   label,
   placeholder,
   labelShow = true,

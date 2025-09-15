@@ -4,17 +4,8 @@ import Button from "@/app/components/Button";
 import Link from "next/link";
 import { getRecentPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
-// import { createClient } from "./utils/server";
-// import type { Database } from "@/types/database.types";
 
 export default async function Home() {
-  // const supabase = await createClient<Database>();
-
-  // // セッションの取得
-  // const {
-  //   data: { session },
-  // } = await supabase.auth.getSession();
-
   // 最近の投稿のデータ取得
   const posts: Post[] = await getRecentPosts();
 
