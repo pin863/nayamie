@@ -33,7 +33,7 @@ export default function Navigation({ session }: NaviProps) {
           </>
         ) : (
           <>
-            <p className="text-red-400">ログインしていません</p>
+            <p className="text-red-400">未ログイン</p>
             <Link href="/login">
               <Button variant="primary" size="sm">
                 ログイン

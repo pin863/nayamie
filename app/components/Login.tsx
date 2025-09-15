@@ -1,6 +1,6 @@
 "use client";
 import Link from "next/link";
-// import FormInput from "@/app/components/FormInput";
+import FormInput from "@/app/components/FormInput";
 import Button from "@/app/components/Button";
 import { useState } from "react";
 import { supabase } from "@/app/utils/supabaseClient";
@@ -67,30 +67,18 @@ export default function Page() {
 
         <div className="text-left space-y-4">
           <form onSubmit={handleSubmit(onSubmit)}>
-            {/* <FormInput
+            <FormInput
               {...register("email", { required: true })}
+              type="email"
               label="メールアドレス"
             />
-            <p>{errors.email?.message}</p>
+            <p className="text-red-500 text-sm pb-3">{errors.email?.message}</p>
             <FormInput
               {...register("password", { required: true })}
               label="パスワード"
-              // value=""
-              // onChange={() => {}}
-            />
-            <p>{errors.password?.message}</p> */}
-            <input
-              type="email"
-              {...register("email", { required: true })}
-              placeholder="メールアドレス"
-            />
-            <p>{errors.email?.message}</p>
-
-            <input
               type="password"
-              {...register("password", { required: true })}
-              placeholder="パスワード"
             />
+            <p className="text-red-500 text-sm ">{errors.password?.message}</p>
 
             <div className="text-center py-6">
               <Button

@@ -42,6 +42,7 @@ export type PostFromDB = {
 
 export type FormInputProps = {
   // register?: any; 
+  type: "text" | "email" | "password";
   label: string;
   placeholder?: string;
   labelShow?: boolean;
