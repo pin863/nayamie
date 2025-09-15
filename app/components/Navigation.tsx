@@ -25,9 +25,9 @@ export default function Navigation({ session }: NaviProps) {
                 投稿する
               </Button>
             </Link>
-            <Link href="/mypage">
+            <Link href="/logout">
               <Button variant="gray" size="sm">
-                マイページ
+                ログアウト
               </Button>
             </Link>
           </>
