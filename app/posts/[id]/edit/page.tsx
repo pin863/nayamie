@@ -67,6 +67,7 @@ export default function Page() {
         <form onSubmit={handleSubmit}>
           <div className="text-left">
             <FormInput
+              type="text"
               label="タイトル"
               placeholder="例：観光バスの路上駐車が深刻化"
               postScreen
@@ -74,6 +75,7 @@ export default function Page() {
               onChange={(e) => setTitle(e.target.value)}
             />
             <FormInput
+              type="text"
               label="詳細内容"
               placeholder="地域の悩みや困りごとの詳細や状況を具体的に説明してください。"
               postScreen
