@@ -70,6 +70,7 @@ export default function Page() {
           <div className="text-left">
             {inputs.map((input) => (
               <FormInput
+                type="text"
                 key={input.label}
                 label={input.label}
                 labelShow={input.labelShow}
