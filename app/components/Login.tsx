@@ -8,7 +8,6 @@ import { useRouter } from "next/navigation";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
-// import type { Database } from "@/types/database.types";
 type Schema = z.infer<typeof schema>;
 
 // 入力データの検証ルールを定義
@@ -19,7 +18,6 @@ const schema = z.object({
 
 export default function Page() {
   const router = useRouter();
-  // const supabase = createClient<Database>();
   const [message, setMessage] = useState("");
 
   const {

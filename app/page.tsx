@@ -1,7 +1,5 @@
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
-import Button from "@/app/components/Button";
-import Link from "next/link";
 import { getRecentPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
 
@@ -12,13 +10,6 @@ export default async function Home() {
   return (
     <main className="py-6">
       <Searchbar />
-      <div className="text-center my-5">
-        <Link href="/posts/create">
-          <Button variant="gray" size="sm">
-            投稿する
-          </Button>
-        </Link>
-      </div>
       <div className="space-y-4 mt-5">
         <h3>最近の投稿</h3>
         <div className="grid grid-cols-3 gap-4 ">
