@@ -13,7 +13,7 @@ type Schema = z.infer<typeof schema>;
 // 入力データの検証ルールを定義
 const schema = z.object({
   email: z.string().email({ message: "メールアドレスの形式ではありません。" }),
-  password: z.string().min(4, { message: "4文字以上入力する必要があります。" }),
+  password: z.string().min(6, { message: "6文字以上入力する必要があります。" }),
 });
 
 export default function Page() {

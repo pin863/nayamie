@@ -9,10 +9,12 @@ export default async function Home() {
 
   return (
     <main className="py-6">
+      {/* 検索バー */}
       <Searchbar />
       <div className="space-y-4 mt-5">
         <h3>最近の投稿</h3>
         <div className="grid grid-cols-3 gap-4 ">
+          {/* 投稿 */}
           {posts.map((post) => (
             <PostComponent
               key={post.id}

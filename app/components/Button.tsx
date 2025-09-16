@@ -1,6 +1,6 @@
 "use client";
 
-// 呼び出し側でvariant:カラー、size:サイズを選択
+// 呼び出し側でvariant:カラー、size:サイズを選択、shape:形を選択
 
 import Link from "next/link";
 import React from "react";

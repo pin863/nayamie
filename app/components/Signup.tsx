@@ -18,7 +18,7 @@ const schema = z
       .email({ message: "メールアドレスの形式ではありません。" }),
     password: z
       .string()
-      .min(4, { message: "4文字以上入力する必要があります。" }),
+      .min(6, { message: "6文字以上入力する必要があります。" }),
     passwordConfirm: z
       .string()
       .min(1, { message: "確認用パスワードを入力してください。" }),

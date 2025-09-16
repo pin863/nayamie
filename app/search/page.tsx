@@ -1,7 +1,7 @@
 import Searchbar from "../components/Searchbar";
 import PostComponent from "../components/PostComponent";
 
-export default function Home() {
+export default function Page() {
   const dummy = {
     id: 1,
     category: { name: "ごみ問題" },

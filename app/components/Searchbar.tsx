@@ -21,7 +21,6 @@ export default function Searchbar() {
         </div>
 
         <div className="border-l border-gray-300 h-6"></div>
-
         {/* 都道府県 */}
         <div className="flex items-center space-x-2 px-2">
           <select className="outline-none bg-transparent text-sm">
@@ -35,7 +34,6 @@ export default function Searchbar() {
         </div>
 
         <div className="border-l border-gray-300 h-6"></div>
-
         {/* キーワード */}
         <div className="flex items-center space-x-2 px-2 flex-1 min-w-0">
           <input
