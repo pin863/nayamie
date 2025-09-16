@@ -18,7 +18,8 @@ export async function createClient<T = unknown>() {
             cookiesToSet.forEach(({ name, value, options }) =>
               cookieStore.set(name, value, options),
             );
-          } catch {
+          }  catch (err) {
+            console.error("エラー:", err);
           }
         },
       },

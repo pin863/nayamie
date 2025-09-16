@@ -1,5 +1,7 @@
-import Searchbar from "../components/Searchbar";
-import PostComponent from "../components/PostComponent";
+import Searchbar from "@/app/components/Searchbar";
+import PostComponent from "@/app/components/PostComponent";
+import { useSearchParams } from "next/navigation";
+import { supabase } from "@/app/utils/supabaseClient";
 
 export default function Page() {
   const dummy = {
@@ -22,10 +24,9 @@ export default function Page() {
           カテゴリ|県|「XXX」の投稿が
           <span className=" font-bold text-xl">XX</span>件見つかりました。
         </p>
-        <div className="grid grid-cols-3 gap-4 ">
-          {[1, 2, 3].map((_, i) => (
+        <div className="grid grid-cols-3 gap-4">
+          <div className="col-span-3 flex justify-center">
             <PostComponent
-              key={i}
               id={dummy.id}
               category={dummy.category}
               prefecture={dummy.prefecture}
@@ -36,7 +37,7 @@ export default function Page() {
               showButton={dummy.showButton}
               user={dummy.user}
             />
-          ))}
+          </div>
         </div>
       </div>
     </main>
