@@ -109,8 +109,9 @@ export default function Page() {
     try {
       await createPost(postData); // supabaseに送信
       alert("投稿成功！");
-      // router.push("/");
-      await getAllPosts();
+      const latestPosts = await getAllPosts();
+      console.log(latestPosts);
+      router.push("/");
     } catch (err) {
       alert("投稿失敗");
       console.error(err);
