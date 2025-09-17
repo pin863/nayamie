@@ -1,3 +1,7 @@
+// ==========================================================
+// ログアウトページ
+// ==========================================================
+
 // import { cookies } from "next/headers";
 // import { createClient } from "@/app/utils/server";
 // import { redirect } from "next/navigation";

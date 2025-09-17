@@ -1,9 +1,11 @@
+// ==========================================================
+// トップページ
+// ==========================================================
+
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
 import { getAllPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
-
-// ===== トップページ =====
 
 export default async function Home() {
   // 最近の投稿のデータ取得

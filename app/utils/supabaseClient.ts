@@ -1,3 +1,7 @@
+// ==========================================================
+// クライアントサイド用 Supabase クライアント生成
+// ==========================================================
+
 import { Database } from "@/types/database.types";
 import { createClient } from "@supabase/supabase-js";
 

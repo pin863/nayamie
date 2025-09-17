@@ -1,6 +1,10 @@
+// ==========================================================
+// 全ページのlayout
+// ==========================================================
+
 import type { Metadata } from "next";
 import "@/app/globals.css";
-import Header from "./components/Header";
+import Header from "@/app/components/Header";
 
 export const metadata: Metadata = {
   title: "ナヤミエ",

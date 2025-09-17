@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 検索結果ページ
+// ==========================================================
+
 import { useEffect, useState } from "react";
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";

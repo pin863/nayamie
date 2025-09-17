@@ -1,4 +1,8 @@
-// Supabaseクライアントを生成
+// ==========================================================
+// Supabaseサーバーサイドクライアントを生成
+// ==========================================================
+
+
 import { cookies } from "next/headers";
 import { createServerClient } from "@supabase/ssr";
 

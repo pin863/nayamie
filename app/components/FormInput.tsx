@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// フォームのテンプレート
+// ==========================================================
+
 import type { FormInputProps } from "@/types/type";
 import { forwardRef } from "react";
 
@@ -12,7 +16,7 @@ const FormInput = forwardRef<
       label,
       placeholder,
       labelShow = true,
-      as = "input",
+      as = "input", // as="textarea"で複数行入力
       rows = 8,
       postScreen = false,
       type = "text",

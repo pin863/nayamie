@@ -1,3 +1,7 @@
+// ==========================================================
+// 投稿情報のコンポーネント
+// ==========================================================
+
 import type { Post } from "@/types/type";
 import Button from "./Button";
 import { getCategoryStyle } from "../utils/getCategoryStyle";

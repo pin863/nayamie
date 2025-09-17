@@ -1,4 +1,9 @@
 "use client";
+
+// ==========================================================
+// ログアウトコンポーネント
+// ==========================================================
+
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 import { supabase } from "@/app/utils/supabaseClient";

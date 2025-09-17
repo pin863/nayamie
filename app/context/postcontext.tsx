@@ -1,3 +1,7 @@
+// ==========================================================
+// 投稿作成・編集時の確認画面でのcontext
+// ==========================================================
+
 import { useContext, createContext } from "react";
 export interface PostContextType {
   label: string;

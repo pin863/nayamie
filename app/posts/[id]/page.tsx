@@ -1,3 +1,7 @@
+// ==========================================================
+// 投稿編集ページ
+// ==========================================================
+
 import PostComponent from "@/app/components/PostComponent";
 import CommentSection from "@/app/components/CommentSection";
 import {

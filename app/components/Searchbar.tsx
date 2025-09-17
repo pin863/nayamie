@@ -1,4 +1,9 @@
 "use client";
+
+// ==========================================================
+// 検索バー
+// ==========================================================
+
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { FaSearch } from "react-icons/fa";

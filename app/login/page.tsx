@@ -1,3 +1,7 @@
+// ==========================================================
+// ログインページ
+// ==========================================================
+
 import Login from "@/app/components/Login";
 import { createClient } from "@/app/utils/server";
 import { redirect } from "next/navigation";

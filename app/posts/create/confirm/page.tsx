@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿作成確認ページ
+// ==========================================================
+
 import { usePostContext } from "../context";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";

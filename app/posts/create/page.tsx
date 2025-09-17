@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿作成ページ
+// ==========================================================
+
 import { useState } from "react";
 import FormInput from "@/app/components/FormInput";
 import Button from "@/app/components/Button";

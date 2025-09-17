@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿詳細画面-コメントエリア
+// ==========================================================
+
 import { useState } from "react";
 import Button from "@/app/components/Button";
 import { createComment } from "@/app/utils/supabaseFunctions";
@@ -36,7 +40,7 @@ export default function CommentSection({ postId, initialComments }: Props) {
   return (
     <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">
       <h4 className="text-lg px-4 pb-2">コメント</h4>
-
+      {/* コメント入力エリア */}
       <div className="bg-gray-100 p-4 rounded-md">
         <textarea
           className="bg-white border-2 border-gray-300 rounded w-full placeholder:tracking-wider placeholder:text-sm placeholder:p-1 focus:outline-none focus:border-blue-400"
@@ -50,7 +54,7 @@ export default function CommentSection({ postId, initialComments }: Props) {
           </Button>
         </div>
       </div>
-
+      {/* 投稿されたコメントエリア */}
       <div className="space-y-5 mt-5">
         {comments.length === 0 ? (
           <p className="text-gray-400 text-center">まだコメントがありません</p>

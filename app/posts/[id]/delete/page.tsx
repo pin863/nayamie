@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿削除ページ
+// ==========================================================
+
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { getPostById, deletePost } from "@/app/utils/supabaseFunctions";

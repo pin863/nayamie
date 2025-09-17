@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// ヘッダー内メニューボタンの切り替え
+// ==========================================================
+
 import Button from "@/app/components/Button";
 import type { Session } from "@supabase/supabase-js";
 import { useState } from "react";

@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿作成ページ-layout
+// ==========================================================
+
 import { ReactNode } from "react";
 import { PostsContextProvider } from "./context";
 

@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// サインアップコンポーネント
+// ==========================================================
+
 import Link from "next/link";
 import FormInput from "@/app/components/FormInput";
 import Button from "@/app/components/Button";

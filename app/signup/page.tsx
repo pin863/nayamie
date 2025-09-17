@@ -1,3 +1,7 @@
+// ==========================================================
+// サインアップページ
+// ==========================================================
+
 import { createClient } from "@/app/utils/server";
 import { redirect } from "next/navigation";
 import type { Database } from "@/types/database.types";

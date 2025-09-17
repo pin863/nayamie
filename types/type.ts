@@ -1,5 +1,8 @@
-import { ChangeEvent } from "react"; 
+// ==========================================================
+// 各種type
+// ==========================================================
 
+import { ChangeEvent } from "react"; 
 
 export type Post = {
   id: number;
@@ -14,11 +17,7 @@ export type Post = {
   category: { name: string };
   prefecture: { name: string };
 };
-// export interface ParamsProps {
-//   params: Promise<{
-//     id: string; 
-//   }>;
-// }
+
 export interface ParamsProps {
   params: {
     id: string; 

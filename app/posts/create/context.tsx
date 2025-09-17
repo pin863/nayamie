@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿作成確認画面でのcontext
+// ==========================================================
+
 import { createContext, useContext, useState, ReactNode } from "react";
 
 // 入力フォームのContext
