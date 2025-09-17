@@ -7,7 +7,7 @@
 import { usePostContext } from "../context";
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
-import { createPost } from "@/app/utils/supabaseFunctions";
+import { createPost, getAllPosts } from "@/app/utils/supabaseFunctions";
 import { supabase } from "@/app/utils/supabaseClient";
 
 export default function Page() {
@@ -109,7 +109,8 @@ export default function Page() {
     try {
       await createPost(postData); // supabaseに送信
       alert("投稿成功！");
-      router.push("/");
+      // router.push("/");
+      await getAllPosts();
     } catch (err) {
       alert("投稿失敗");
       console.error(err);

@@ -87,7 +87,6 @@ export const getPostById = async (id: number) => {
 export const createPost = async (postData: PostInsert)  => {
   const postWithUser = {
     ...postData,
-    // user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // ひとまず固定のuser_id 
     prefecture_id: postData.prefecture_id
   };
 
