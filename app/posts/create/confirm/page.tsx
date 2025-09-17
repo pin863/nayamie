@@ -90,13 +90,16 @@ export default function Page() {
     };
     const prefecture_id = prefectureMap[prefectureContext];
 
+    const {
+      data: { user },
+    } = await supabase.auth.getUser();
     // 投稿データ作成
     const postData = {
       title: data.find((d) => d.label === "タイトル")?.context || "",
       content: data.find((d) => d.label === "詳細内容")?.context || "",
       category_id,
       prefecture_id,
-      user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // 固定値
+      user_id: user?.id,
     };
 
     try {

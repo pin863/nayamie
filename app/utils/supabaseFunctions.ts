@@ -83,7 +83,7 @@ export const getPostById = async (id: number) => {
 export const createPost = async (postData: PostInsert)  => {
   const postWithUser = {
     ...postData,
-    user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // ひとまず固定のuser_id 
+    // user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // ひとまず固定のuser_id 
     prefecture_id: postData.prefecture_id
   };
 
@@ -91,6 +91,7 @@ export const createPost = async (postData: PostInsert)  => {
     .from("posts")
     .insert([postWithUser]);
 
+  
   if (error) {
     console.error("Supabase エラー内容:", error);
     throw new Error(`投稿に失敗しました。再度お試しください。`);
