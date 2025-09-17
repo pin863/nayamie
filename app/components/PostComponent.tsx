@@ -52,7 +52,7 @@ export default function PostComponent({
         {/* 詳しく見るボタン */}
         {showButton && href && (
           <Link href={`/posts/${id}`}>
-            <Button size="sm" shape="square">
+            <Button size="sm" shape="square" variant="gray">
               詳しく見る
             </Button>
           </Link>

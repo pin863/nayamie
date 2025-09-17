@@ -4,7 +4,47 @@ import { Database } from "@/types/database.types";
 type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
 
 // DBから最新の投稿6件の取得
-export const getRecentPosts = async () => {
+// export const getRecentPosts = async () => {
+//   const { data, error } = await supabase
+//     .from("posts")
+//     .select(
+//       `
+//     id,
+//     title,
+//     content,
+//     created_at,
+//     user:user_id ( name ),
+//     category:category_id ( name ),
+//     prefecture:prefecture_id ( name )
+//   `
+//     )
+//     .order("created_at", { ascending: false })
+//     .limit(6); // 最新6件;
+
+//   if (error) {
+//     console.error(error);
+//     return [];
+//   }
+
+//   return data.map((d) => ({
+//     id: d.id,
+//     title: d.title,
+//     content: d.content,
+//     date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+//     year: "numeric",
+//     month: "numeric",
+//     day: "numeric",
+//   }),
+//     username: d.user.name,
+//     user: d.user,
+//     category: d.category,
+//     prefecture: d.prefecture,
+//     showButton: true,
+//   }));
+// };
+
+// DBからすべての投稿の取得
+export const getAllPosts = async () => {
   const { data, error } = await supabase
     .from("posts")
     .select(
@@ -19,7 +59,6 @@ export const getRecentPosts = async () => {
   `
     )
     .order("created_at", { ascending: false })
-    .limit(6); // 最新6件;
 
   if (error) {
     console.error(error);

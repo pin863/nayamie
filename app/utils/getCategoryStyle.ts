@@ -1,17 +1,17 @@
 export function getCategoryStyle(category: string) {
   switch (category) {
     case "ごみ問題":
-      return { backgroundColor: "#FFF7D7", color: "#78350F" };
+      return { backgroundColor: "#FACC15", color: "#1E293B" }; // 黄色系
     case "騒音":
-      return { backgroundColor: "#FFE5E3", color: "#7F1D1D" };
+      return { backgroundColor: "#EF4444", color: "#FFFFFF" }; // 赤系
     case "外国人":
-      return { backgroundColor: "#DCF0F9", color: "#1E40AF" };
+      return { backgroundColor: "#3B82F6", color: "#FFFFFF" }; // 青系
     case "交通":
-      return { backgroundColor: "#E9FFE3", color: "#166534" };
+      return { backgroundColor: "#22C55E", color: "#FFFFFF" }; // 緑系
     case "子育て":
-      return { backgroundColor: "#FFE5FE", color: "#831843" };
+      return { backgroundColor: "#E879F9", color: "#FFFFFF" }; // ピンク系
     case "その他":
     default:
-      return { backgroundColor: "#E5E7EB", color: "#374151" };
+      return { backgroundColor: "#6B7280", color: "#FFFFFF" }; // グレー系
   }
 }

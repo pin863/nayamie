@@ -33,7 +33,7 @@ const FormInput = forwardRef<
         {labelShow && (
           <label
             htmlFor={label}
-            className="text-sm pl-3 font-bold tracking-widest text-gray-500"
+            className="text-sm font-bold tracking-widest text-gray-500"
           >
             {label}
             <span className="text-red-500">*</span>

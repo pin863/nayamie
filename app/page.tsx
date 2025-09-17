@@ -1,11 +1,11 @@
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
-import { getRecentPosts } from "@/app/utils/supabaseFunctions";
+import { getAllPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
 
 export default async function Home() {
   // 最近の投稿のデータ取得
-  const posts: Post[] = await getRecentPosts();
+  const posts: Post[] = await getAllPosts();
 
   return (
     <main className="py-6">
