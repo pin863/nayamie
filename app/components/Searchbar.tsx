@@ -70,8 +70,9 @@ export default function Searchbar() {
 
   const handleSearch = () => {
     const params = new URLSearchParams();
-    if (category) params.append("category", category);
-    if (prefecture) params.append("prefecture", prefecture);
+    // 空文字なら all に変換
+    params.append("category", category || "all");
+    params.append("prefecture", prefecture || "all");
     if (keyword) params.append("keyword", keyword);
 
     router.push(`/search?${params.toString()}`);
@@ -90,6 +91,9 @@ export default function Searchbar() {
             <option value="" disabled hidden>
               カテゴリ
             </option>
+
+            <option value="all">すべて</option>
+
             {Object.entries(categoryMap).map(([id, name]) => (
               <option key={id} value={id}>
                 {name}
@@ -102,13 +106,15 @@ export default function Searchbar() {
         {/* 都道府県 */}
         <div className="flex items-center space-x-2 px-2">
           <select
-            className="outline-none border-none bg-transparent text-sm"
             value={prefecture}
             onChange={(e) => setPrefecture(e.target.value)}
           >
             <option value="" disabled hidden>
               都道府県
             </option>
+
+            <option value="all">すべて</option>
+
             {Object.entries(prefectureMap).map(([id, name]) => (
               <option key={id} value={id}>
                 {name}
