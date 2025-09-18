@@ -1,4 +1,9 @@
 "use client";
+
+// ==========================================================
+// 投稿編集ページ-layout
+// ==========================================================
+
 import { PostContext, PostContextType } from "@/app/context/postcontext";
 import { useState, ReactNode } from "react";
 

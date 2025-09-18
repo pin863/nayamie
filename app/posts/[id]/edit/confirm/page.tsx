@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿編集確認ページ
+// ==========================================================
+
 import { useRouter } from "next/navigation";
 import Button from "@/app/components/Button";
 import { updatePost } from "@/app/utils/supabaseFunctions";
@@ -102,7 +106,6 @@ export default function Page() {
       content: data.find((d) => d.label === "詳細内容")?.context || "",
       category_id,
       prefecture_id,
-      user_id: "0d8abe50-8f93-44da-ab62-7ddc489d04af", // 固定値
     };
 
     try {

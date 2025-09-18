@@ -1,5 +1,9 @@
 "use client";
 
+// ==========================================================
+// 投稿編集ページ
+// ==========================================================
+
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import FormInput from "@/app/components/FormInput";
