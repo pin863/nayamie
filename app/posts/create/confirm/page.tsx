@@ -109,7 +109,7 @@ export default function Page() {
     try {
       await createPost(postData); // supabaseに送信
       alert("投稿成功！");
-      const latestPosts = await getAllPosts();
+      const latestPosts = await getAllPosts(1, 6);
       console.log(latestPosts);
       router.push("/");
     } catch (err) {

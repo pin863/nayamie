@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
 import { useSearchParams } from "next/navigation";
@@ -91,14 +91,15 @@ export default function SearchPageClient() {
     47: "沖縄県",
   };
 
-  const fetchPosts = async (currentPage: number) => {
-    setLoading(true);
-    const offset = (currentPage - 1) * limit;
+  const fetchPosts = useCallback(
+    async (currentPage: number) => {
+      setLoading(true);
+      const offset = (currentPage - 1) * limit;
 
-    let query = supabase
-      .from("posts")
-      .select(
-        `
+      let query = supabase
+        .from("posts")
+        .select(
+          `
       id,
       title,
       content,
@@ -107,56 +108,58 @@ export default function SearchPageClient() {
       category:category_id ( name ),
       prefecture:prefecture_id ( name )
     `,
-        { count: "exact" }
-      )
-      .order("created_at", { ascending: false })
-      .range(offset, offset + limit - 1);
+          { count: "exact" }
+        )
+        .order("created_at", { ascending: false })
+        .range(offset, offset + limit - 1);
 
-    if (category && category !== "all")
-      query = query.eq("category_id", Number(category));
-    if (prefecture && prefecture !== "all")
-      query = query.eq("prefecture_id", Number(prefecture));
-    if (keyword) query = query.ilike("title", `%${keyword}%`);
+      if (category && category !== "all")
+        query = query.eq("category_id", Number(category));
+      if (prefecture && prefecture !== "all")
+        query = query.eq("prefecture_id", Number(prefecture));
+      if (keyword) query = query.ilike("title", `%${keyword}%`);
 
-    const { data, error, count } = await query;
+      const { data, error, count } = await query;
 
-    if (error) {
-      console.error(error);
-      setPosts([]);
-    } else {
-      const mapped = (data || []).map((d) => ({
-        id: d.id,
-        title: d.title,
-        content: d.content,
-        date: new Date(d.created_at).toLocaleDateString("ja-JP", {
-          year: "numeric",
-          month: "numeric",
-          day: "numeric",
-        }),
-        user: d.user,
-        category: d.category,
-        prefecture: d.prefecture,
-      }));
-      setPosts(mapped);
-      if (count) {
-        setTotalPages(Math.ceil(count / limit));
-        setTotalCount(count);
+      if (error) {
+        console.error(error);
+        setPosts([]);
+      } else {
+        const mapped = (data || []).map((d) => ({
+          id: d.id,
+          title: d.title,
+          content: d.content,
+          date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+            year: "numeric",
+            month: "numeric",
+            day: "numeric",
+          }),
+          user: d.user,
+          category: d.category,
+          prefecture: d.prefecture,
+        }));
+        setPosts(mapped);
+        if (count) {
+          setTotalPages(Math.ceil(count / limit));
+          setTotalCount(count);
+        }
       }
-    }
 
-    setLoading(false);
-  };
+      setLoading(false);
+    },
+    [category, prefecture, keyword, limit]
+  );
 
-  // 検索条件が変わったら page をリセットして fetch
+  // 検索条件が変わったらpageをリセットしてfetch
   useEffect(() => {
     setPage(1);
-    fetchPosts(1); // ここで currentPage=1 を渡す
-  }, [category, prefecture, keyword]);
+    fetchPosts(1); // currentPage=1を渡す
+  }, [category, prefecture, keyword, fetchPosts]);
 
-  // page が変わったとき fetch
+  // pageが変わったときfetch
   useEffect(() => {
     if (page !== 1) fetchPosts(page);
-  }, [page]);
+  }, [page, fetchPosts]);
 
   return (
     <main>
