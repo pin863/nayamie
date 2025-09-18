@@ -6,46 +6,52 @@
 
 import { supabase } from "@/app/utils/supabaseClient";
 import { Database } from "@/types/database.types"; 
+import type { Post } from "@/types/type";
 
 type PostInsert = Database["public"]["Tables"]["posts"]["Insert"];
 
 // DBからすべての投稿の取得
-export const getAllPosts = async () => {
-  const { data, error } = await supabase
+export const getAllPosts = async (limit: number, offset: number) => {
+  const { data, error, count } = await supabase
     .from("posts")
     .select(
       `
-    id,
-    title,
-    content,
-    created_at,
-    user:user_id ( name ),
-    category:category_id ( name ),
-    prefecture:prefecture_id ( name )
-  `
+        id,
+        title,
+        content,
+        created_at,
+        user:user_id ( name ),
+        category:category_id ( name ),
+        prefecture:prefecture_id ( name )
+      `,
+      { count: "exact" } // 件数
     )
     .order("created_at", { ascending: false })
+    .range(offset, offset + limit - 1); // ページネーション範囲
 
   if (error) {
     console.error(error);
-    return [];
+    return { data: [] as Post[], count: 0 };
   }
 
-  return data.map((d) => ({
-    id: d.id,
-    title: d.title,
-    content: d.content,
-    date: new Date(d.created_at).toLocaleDateString("ja-JP", {
-    year: "numeric",
-    month: "numeric",
-    day: "numeric",
-  }),
-    username: d.user.name,
-    user: d.user,
-    category: d.category,
-    prefecture: d.prefecture,
-    showButton: true,
-  }));
+  const formattedData: Post[] =
+    data?.map((d) => ({
+      id: d.id,
+      title: d.title,
+      content: d.content,
+      date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+        year: "numeric",
+        month: "numeric",
+        day: "numeric",
+      }),
+      username: d.user.name,
+      user: d.user,
+      category: d.category,
+      prefecture: d.prefecture,
+      showButton: true,
+    })) ?? [];
+
+  return { data: formattedData, count: count ?? 0 };
 };
 
 // DBから特定のIDの1件を取得

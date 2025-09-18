@@ -5,6 +5,7 @@ import Searchbar from "@/app/components/Searchbar";
 import PostComponent from "@/app/components/PostComponent";
 import { useSearchParams } from "next/navigation";
 import { supabase } from "@/app/utils/supabaseClient";
+import Button from "../components/Button";
 
 type PostFromDB = {
   id: number;
@@ -25,6 +26,12 @@ export default function SearchPageClient() {
   const [posts, setPosts] = useState<PostFromDB[]>([]);
   const [loading, setLoading] = useState(true);
 
+  // ページネーション用
+  const [page, setPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const [totalCount, setTotalCount] = useState(0);
+  const limit = 6;
+
   const categoryMap: Record<string, string> = {
     "1": "ごみ問題",
     "2": "騒音",
@@ -34,7 +41,7 @@ export default function SearchPageClient() {
     "6": "その他",
   };
 
-  const prefectureMap: Record<string, string> = {
+  const prefectureMap: Record<number, string> = {
     1: "北海道",
     2: "青森県",
     3: "岩手県",
@@ -84,69 +91,91 @@ export default function SearchPageClient() {
     47: "沖縄県",
   };
 
-  useEffect(() => {
-    const fetchPosts = async () => {
-      setLoading(true);
+  const fetchPosts = async (currentPage: number) => {
+    setLoading(true);
+    const offset = (currentPage - 1) * limit;
 
-      let query = supabase.from("posts").select(`
-        id,
-        title,
-        content,
-        created_at,
-        user:user_id ( name ),
-        category:category_id ( name ),
-        prefecture:prefecture_id ( name )
-      `);
+    let query = supabase
+      .from("posts")
+      .select(
+        `
+      id,
+      title,
+      content,
+      created_at,
+      user:user_id ( name ),
+      category:category_id ( name ),
+      prefecture:prefecture_id ( name )
+    `,
+        { count: "exact" }
+      )
+      .order("created_at", { ascending: false })
+      .range(offset, offset + limit - 1);
 
-      if (category && category !== "all")
-        query = query.eq("category_id", Number(category));
-      if (prefecture && prefecture !== "all")
-        query = query.eq("prefecture_id", Number(prefecture));
-      if (keyword) query = query.ilike("title", `%${keyword}%`);
+    if (category && category !== "all")
+      query = query.eq("category_id", Number(category));
+    if (prefecture && prefecture !== "all")
+      query = query.eq("prefecture_id", Number(prefecture));
+    if (keyword) query = query.ilike("title", `%${keyword}%`);
 
-      const { data, error } = await query;
+    const { data, error, count } = await query;
 
-      if (error) {
-        console.error(error);
-      } else {
-        const mapped = (data || []).map((d) => ({
-          id: d.id,
-          title: d.title,
-          content: d.content,
-          date: new Date(d.created_at).toLocaleDateString("ja-JP", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-          }),
-          user: d.user,
-          category: d.category,
-          prefecture: d.prefecture,
-        }));
-        setPosts(mapped);
+    if (error) {
+      console.error(error);
+      setPosts([]);
+    } else {
+      const mapped = (data || []).map((d) => ({
+        id: d.id,
+        title: d.title,
+        content: d.content,
+        date: new Date(d.created_at).toLocaleDateString("ja-JP", {
+          year: "numeric",
+          month: "numeric",
+          day: "numeric",
+        }),
+        user: d.user,
+        category: d.category,
+        prefecture: d.prefecture,
+      }));
+      setPosts(mapped);
+      if (count) {
+        setTotalPages(Math.ceil(count / limit));
+        setTotalCount(count);
       }
+    }
 
-      setLoading(false);
-    };
+    setLoading(false);
+  };
 
-    fetchPosts();
+  // 検索条件が変わったら page をリセットして fetch
+  useEffect(() => {
+    setPage(1);
+    fetchPosts(1); // ここで currentPage=1 を渡す
   }, [category, prefecture, keyword]);
+
+  // page が変わったとき fetch
+  useEffect(() => {
+    if (page !== 1) fetchPosts(page);
+  }, [page]);
 
   return (
     <main>
       <Searchbar />
+      {/* 検索条件と該当件数 */}
       <div className="space-y-4 mt-5">
         <p className="text-gray-600 tracking-widest">
           {category && category !== "all"
-            ? `カテゴリ: ${categoryMap[Number(category)]} | `
+            ? `カテゴリ: ${categoryMap[category]} | `
             : "カテゴリ: すべて | "}
           {prefecture && prefecture !== "all"
             ? `都道府県: ${prefectureMap[Number(prefecture)]} | `
             : "都道府県: すべて | "}
           キーワード: {keyword || "未指定"} の投稿が
-          <span className="font-bold text-xl">{posts.length}</span>{" "}
+          <span className="font-bold text-xl">{totalCount}</span>{" "}
           件見つかりました。
         </p>
 
+        {/* 検索結果 */}
         <div className="grid grid-cols-3 gap-4">
           {loading ? (
             <p>読み込み中...</p>
@@ -163,9 +192,34 @@ export default function SearchPageClient() {
               />
             ))
           ) : (
-            <p>該当する投稿はありません。</p>
+            <p className="font-bold mt-3 text-xl">該当する投稿はありません。</p>
           )}
         </div>
+
+        {/* ページネーション */}
+        {!loading && posts.length > 0 && (
+          <div className="flex justify-center items-center gap-4 mt-6">
+            <Button
+              variant="gray"
+              size="sm"
+              onClick={() => setPage((prev) => Math.max(prev - 1, 1))}
+              disabled={page === 1}
+            >
+              前へ
+            </Button>
+            <span>
+              {page} / {totalPages}
+            </span>
+            <Button
+              variant="gray"
+              size="sm"
+              onClick={() => setPage((prev) => Math.min(prev + 1, totalPages))}
+              disabled={page === totalPages}
+            >
+              次へ
+            </Button>
+          </div>
+        )}
       </div>
     </main>
   );

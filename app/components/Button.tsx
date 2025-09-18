@@ -31,7 +31,7 @@ const Button = ({
     gray: "bg-gray-200 text-gray-600 duration-300 hover:opacity-50",
     red: "bg-rose-900 text-white duration-300 hover:opacity-50",
     white:
-      "bg-gray-white border border-gray-200 text-gray-600 duration-300 hover:opacity-50",
+      "bg-gray-white border border-gray-200 text-stone-600 duration-300 hover:opacity-50",
   }[variant];
 
   // ボタンサイズ選択
