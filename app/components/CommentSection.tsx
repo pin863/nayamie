@@ -38,7 +38,7 @@ export default function CommentSection({ postId, initialComments }: Props) {
   };
 
   return (
-    <div className="bg-white shadow-md rounded-md p-4 w-1/3 mx-auto border border-gray-200">
+    <div className="bg-white shadow-md rounded-md p-4 md:w-1/3 mx-auto border border-gray-200">
       <h4 className="text-lg px-4 pb-2">コメント</h4>
       {/* コメント入力エリア */}
       <div className="bg-gray-100 p-4 rounded-md">

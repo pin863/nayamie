@@ -15,14 +15,17 @@ export default async function Home({ params }: { params: { id: string } }) {
   const postId = Number(params.id);
 
   return (
-    <main>
+    <main className="px-4 md:px-8">
       <div className="space-y-8 mt-10">
-        <div className="w-1/2 mx-auto">
-          {/* 投稿詳細 */}
+        {/* 投稿詳細 */}
+        <div className="w-full md:w-3/4 lg:w-1/2 mx-auto">
           <PostComponent {...post} isOwner={true} />
         </div>
+
         {/* コメント欄 */}
-        <CommentSection postId={postId} initialComments={comments} />
+        <div className="w-full mx-auto">
+          <CommentSection postId={postId} initialComments={comments} />
+        </div>
       </div>
     </main>
   );

@@ -106,11 +106,11 @@ export default function Navigation({ session }: NavigationProps) {
               投稿する
             </Link>
             <Link
-              href="/mypage"
+              href="/logout"
               className="py-3 border-b border-gray-300"
               onClick={() => setOpenMenu(false)}
             >
-              マイページ
+              ログアウト
             </Link>
           </>
         ) : (

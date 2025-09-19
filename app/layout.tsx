@@ -18,7 +18,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ja">
-      <body className="bg-basecolor text-gray-700 mx-30 tracking-wide">
+      <body className="bg-basecolor text-gray-700 mx-5 lg:mx-30 tracking-wide">
         <Header />
         {children}
       </body>
