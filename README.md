@@ -36,6 +36,20 @@
 
 ---
 
+## テーブル定義書
+
+- figma にて作成
+
+https://www.figma.com/board/RndoYAILrKbhRfvyoxAEY1/%E3%82%AA%E3%83%AA%E3%82%B8%E3%83%8A%E3%83%AB%E3%82%A2%E3%83%97%E3%83%AA%E3%80%80%E3%83%86%E3%83%BC%E3%83%96%E3%83%AB%E5%AE%9A%E7%BE%A9%E6%9B%B8-ER%E5%9B%B3?node-id=0-1&p=f&t=BEvoUZQtKle2c6Qc-0
+
+## デザインカンプ
+
+- figma にて作成
+
+https://www.figma.com/design/oTkOytcwKYU5adws6TRVnY/%E7%B0%A1%E6%98%93%E3%82%A2%E3%83%97%E3%83%AA%E3%80%80%E3%83%87%E3%82%B6%E3%82%A4%E3%83%B3%E3%82%AB%E3%83%B3%E3%83%97?node-id=0-1&p=f&t=p3CVgXDHbHZqMGUA-0
+
+---
+
 ## 🛠 使用技術
 
 ### フロントエンド
