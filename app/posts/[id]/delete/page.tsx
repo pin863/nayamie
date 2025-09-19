@@ -53,8 +53,8 @@ export default function DeletePage({
   }
 
   return (
-    <main className="flex justify-center">
-      <div className="px-16 py-10 space-y-6 lg:w-1/2 my-5 bg-white shadow-md rounded-xl">
+    <main className="lg:flex justify-center">
+      <div className="px-6 lg:px-16 py-10 space-y-6 lg:w-1/3 mt-15 bg-white shadow-md rounded-xl">
         <h3 className="text-2xl font-bold tracking-wider text-center text-gray-600">
           投稿<span className="text-red-400">削除</span>確認画面
         </h3>

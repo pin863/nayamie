@@ -1,5 +1,5 @@
 // ==========================================================
-// 投稿編集ページ
+// 投稿詳細ページ
 // ==========================================================
 
 import PostComponent from "@/app/components/PostComponent";
@@ -15,7 +15,7 @@ export default async function Home({ params }: { params: { id: string } }) {
   const postId = Number(params.id);
 
   return (
-    <main className="px-4 md:px-8">
+    <main className="md:px-8">
       <div className="space-y-8 mt-10">
         {/* 投稿詳細 */}
         <div className="w-full md:w-3/4 lg:w-1/2 mx-auto">
