@@ -42,7 +42,7 @@ export default function Home() {
       {/* メインビジュアル */}
       <div className="flex justify-center mb-6">
         <Image
-          src="/top.svg"
+          src="/top.webp"
           alt="地域の悩みを見える化。"
           width={300}
           height={300}
