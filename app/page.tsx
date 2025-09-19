@@ -10,6 +10,7 @@ import PostComponent from "@/app/components/PostComponent";
 import { getAllPosts } from "@/app/utils/supabaseFunctions";
 import type { Post } from "@/types/type";
 import Button from "./components/Button";
+import Image from "next/image";
 
 export default function Home() {
   const [posts, setPosts] = useState<Post[]>([]);
@@ -36,25 +37,27 @@ export default function Home() {
   }, [page]);
 
   return (
-    <main className="py-6">
+    <main className="pt-6 pb-15">
+      <div className="flex justify-center mb-6">
+        <Image
+          src="/top.svg"
+          alt="地域の悩みを見える化。"
+          width={300}
+          height={300}
+        />
+      </div>
+
       <Searchbar />
       <div className="space-y-4 mt-5">
         <h3>最近の投稿</h3>
-        {loading ? (
+        {posts.length === 0 && loading ? (
           <p>読み込み中...</p>
         ) : (
           <>
-            {/* 投稿情報エリア */}
+            {/* 投稿情報カード */}
             <div className="grid grid-cols-3 gap-4">
               {posts.map((post) => (
-                <PostComponent
-                  key={post.id}
-                  {...post}
-                  date={post.date}
-                  showButton={true}
-                  href={`/posts/${post.id}`}
-                  truncate={true}
-                />
+                <PostComponent key={post.id} {...post} />
               ))}
             </div>
 
