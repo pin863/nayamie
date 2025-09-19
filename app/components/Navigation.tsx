@@ -23,7 +23,7 @@ export default function Navigation({ session }: NavigationProps) {
       <div className="hidden md:flex items-center space-x-6 font-semibold">
         {session ? (
           <>
-            <p className="text-blue-400">ログイン中</p>
+            <p className="text-sm text-blue-400">ログイン中</p>
             <Link href="/posts/create">
               <Button variant="primary" size="sm">
                 投稿する
@@ -37,7 +37,9 @@ export default function Navigation({ session }: NavigationProps) {
           </>
         ) : (
           <>
-            <p className="text-red-400">未ログイン</p>
+            <p className="text-sm text-orange-400">
+              投稿するにはログインしてね
+            </p>
             <Link href="/login">
               <Button variant="primary" size="sm">
                 ログイン
@@ -96,6 +98,13 @@ export default function Navigation({ session }: NavigationProps) {
           openMenu ? "translate-x-0" : "translate-x-full"
         }`}
       >
+        <Link
+          href="/"
+          className="py-3 border-b border-gray-300"
+          onClick={() => setOpenMenu(false)}
+        >
+          ホーム
+        </Link>
         {session ? (
           <>
             <Link
@@ -131,13 +140,6 @@ export default function Navigation({ session }: NavigationProps) {
             </Link>
           </>
         )}
-        <Link
-          href="/"
-          className="py-3 border-b border-gray-300"
-          onClick={() => setOpenMenu(false)}
-        >
-          ホーム
-        </Link>
       </nav>
     </>
   );
